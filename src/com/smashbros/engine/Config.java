@@ -16,6 +16,10 @@ public class Config {
 		this.data = data;
 	}
 	
+	public ConfigData getData() {
+		return this.data;
+	}
+	
 	public Config instance() {
 		if (_instance == null)
 			_instance = new Config();

@@ -1,18 +1,21 @@
 package com.smashbros.engine;
 
 import com.smashbros.interfaces.IRunnable;
+import com.smashbros.objects.Character;
 import com.smashbros.objects.controllers.Controller;
 import com.smashbros.objects.controllers.KeyboardController;
-import com.smashbros.objects.Character;
 
-import javafx.stage.Stage;
-
-public class Engine extends Window implements IRunnable {
-
-	public Engine(double x, double y, Stage s) {
-		super(x, y, s);
-		setup();
-		new KeyboardController(new Character());
+public class OldEngine extends OldWindow implements IRunnable {	
+	
+	public OldEngine(double x, double y, String[] args) {
+		super(x, y, args);
+		//Character ch = new Character();
+		//KeyboardController c = new KeyboardController(ch);
+		System.out.println("start");
+	}
+	
+	public OldEngine() {
+		
 	}
 	
 	public void setup() {
@@ -25,14 +28,13 @@ public class Engine extends Window implements IRunnable {
 		root.setOnKeyReleased((key) -> {
 			Controller.keyRelease(key.getCode());
 		});
-		
-		Tick.addToLoop(this);
 	}
 
 	@Override
 	public void run() {
+		System.out.println("kjkjkj");
+
 		
 	}
-
 
 }
