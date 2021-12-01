@@ -34,15 +34,18 @@ public class KeyboardController extends Controller {
 			KeyAction a = getAction(c, this.binds);
 		
 			if (a == null) continue;
-				System.out.println(c);
 			switch(a) {
 			case JUMP:
+				cEntity.jump();
 				break;
 			case DOWN:
+				cEntity.down();
 				break;
 			case LEFT:
+				cEntity.left();
 				break;
 			case RIGHT:
+				cEntity.right();
 				break;
 			default: break;
 			}

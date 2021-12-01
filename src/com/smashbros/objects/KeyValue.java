@@ -16,5 +16,4 @@ public class KeyValue<T> {
 	public String getKey() {
 		return key;
 	}
-	
 }

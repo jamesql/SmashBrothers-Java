@@ -27,6 +27,7 @@ public abstract class Controller implements IRunnable {
 	}
 	
 	public static void keyPress(KeyCode c) {
+		for (KeyCode x : activeCodes) if (x.equals(c)) return;
 		activeCodes.add(c);
 	}
 	

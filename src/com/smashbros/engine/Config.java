@@ -8,7 +8,7 @@ public class Config {
 	private ConfigData data;
 	
 	public Config() {
-		
+		this.data = new ConfigData();
 	}
 	
 	// set config data
@@ -20,7 +20,15 @@ public class Config {
 		return this.data;
 	}
 	
-	public Config instance() {
+	public <T> void add(String key, T value) {
+		this.data.add(key, value);
+	}
+	
+	public <T> T get(String key) {
+		return this.data.get(key);
+	}
+	
+	public static Config instance() {
 		if (_instance == null)
 			_instance = new Config();
 		

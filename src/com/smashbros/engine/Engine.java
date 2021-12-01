@@ -2,9 +2,11 @@ package com.smashbros.engine;
 
 import com.smashbros.interfaces.IRunnable;
 import com.smashbros.objects.controllers.Controller;
+import com.smashbros.objects.controllers.KeyActionPair;
 import com.smashbros.objects.controllers.KeyboardController;
 import com.smashbros.objects.Character;
 
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
 public class Engine extends Window implements IRunnable {
@@ -13,6 +15,8 @@ public class Engine extends Window implements IRunnable {
 		super(x, y, s);
 		setup();
 		new KeyboardController(new Character());
+		new KeyboardController(new Character(), KeyActionPair.DEFAULT_ARROW);
+
 	}
 	
 	public void setup() {
@@ -27,6 +31,10 @@ public class Engine extends Window implements IRunnable {
 		});
 		
 		Tick.addToLoop(this);
+	}
+	
+	public static void addGraphic(Shape s) {
+		Engine.root.getChildren().add(s);
 	}
 
 	@Override
