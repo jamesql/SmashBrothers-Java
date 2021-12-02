@@ -31,6 +31,7 @@ public class KeyboardController extends Controller {
 		IControllable cEntity = (IControllable) entity;
 
 		for(KeyCode c : activeCodes) {
+			System.out.println(c);
 			KeyAction a = getAction(c, this.binds);
 		
 			if (a == null) continue;
@@ -50,6 +51,7 @@ public class KeyboardController extends Controller {
 			default: break;
 			}
 		}
+		System.out.println("----");
 		
 	}
 

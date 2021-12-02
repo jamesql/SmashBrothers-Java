@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.smashbros.interfaces.IDrawable;
 import com.smashbros.interfaces.IHitbox;
 import com.smashbros.interfaces.IRunnable;
+import com.smashbros.objects.Hitbox;
 
 public class EntityList implements IRunnable {
 	private static ArrayList<Entity> list;
@@ -31,6 +32,15 @@ public class EntityList implements IRunnable {
 		for (Entity f : list) 
 			if (!(f instanceof IHitbox) || f.eIndex == e.eIndex || f.type.equals("character")) continue;
 			else if (((IHitbox) f).getHitbox().isColliding(h.getHitbox())) return true;
+		
+		return false;
+	}
+	
+	public static boolean isCollidingGhostBox(int entityId, Hitbox h) {
+		for (Entity e : list) {
+			if (!(e instanceof IHitbox) || e.eIndex == entityId || e.type.equals("character")) continue;
+			else if (((IHitbox) e).getHitbox().isColliding(h)) return true;
+		}
 		
 		return false;
 	}
