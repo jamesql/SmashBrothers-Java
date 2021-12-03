@@ -6,7 +6,9 @@ import com.smashbros.objects.controllers.KeyActionPair;
 import com.smashbros.objects.controllers.KeyboardController;
 import com.smashbros.objects.Character;
 
-import javafx.scene.shape.Shape;
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class Engine extends Window implements IRunnable {
@@ -33,8 +35,16 @@ public class Engine extends Window implements IRunnable {
 		Tick.addToLoop(this);
 	}
 	
-	public static void addGraphic(Shape s) {
+	public static void addGraphic(Node s) {
 		Engine.root.getChildren().add(s);
+	}
+
+	public static void addImage(ImageView i) {
+		Engine.root.getChildren().add(i);
+	}
+
+	public static Pane getPane() {
+		return Engine.root;
 	}
 
 	@Override
