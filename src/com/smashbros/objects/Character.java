@@ -23,14 +23,14 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	
 	public Character() {
 		super("character");
-		this.vbox = new Rectangle(150, 150, 50, 50);
+		this.vbox = new Rectangle(500, 500, 50, 50);
 		vbox.setFill(Color.GOLD);
 		Engine.addGraphic(vbox);
 		this.hbox = new Hitbox(this.vbox);
 		this.gbox = hbox;
 		this.kList = new KeyFrameList();
 		
-		kList.addKeyFrame(new KeyFrame(0, KeyFrameType.GRAVITY, 0));
+		kList.addKeyFrame(new KeyFrame(100, KeyFrameType.GRAVITY, 0));
 	}
 	
 	public void updateGhostBox(int xChange, int yChange) {
@@ -49,7 +49,6 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	public void draw() {
 		
 		Point2D z = kList.getNextFrame();
-		System.out.println(z);
 		updateGhostBox(z);
 		
 		if (!EntityList.isCollidingGhostBox(eIndex, gbox)) {

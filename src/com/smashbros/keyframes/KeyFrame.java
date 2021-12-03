@@ -26,10 +26,14 @@ public class KeyFrame {
 		int y = (int) ((-1/maxFrames)*Math.pow(curFrame, 2)+curFrame);
 		
 		y/=8;
-		System.out.println(curFrame + " - " + y);
+		//System.out.println(curFrame + " - " + y);
 		
 		curFrame++;
 		return new Point2D(0, -y);
+	}
+	
+	public Point2D getNextGravityFrame() {
+		return new Point2D(0,3);
 	}
 	
 	public Point2D getNextFrame() {
@@ -38,6 +42,8 @@ public class KeyFrame {
 		switch(type) {
 		case JUMPING:
 			return getNextJumpFrame();
+		case GRAVITY:
+			return getNextGravityFrame();
 		default:
 			return null;
 		}

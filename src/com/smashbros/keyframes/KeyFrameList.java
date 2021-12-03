@@ -19,6 +19,10 @@ public class KeyFrameList {
 		
 		for (KeyFrame k : list) {
 			Point2D t = k.getNextFrame();
+			
+			if (numOfType(KeyFrameType.JUMPING) > 0 && k.getType().equals(KeyFrameType.GRAVITY))
+				continue;
+				
 			x += t.getX();
 			y += t.getY();
 		}
