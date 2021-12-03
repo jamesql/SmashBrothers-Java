@@ -3,11 +3,15 @@ package com.smashbros.objects;
 import com.smashbros.engine.Engine;
 import com.smashbros.engine.Entity;
 import com.smashbros.engine.EntityList;
+import com.smashbros.enums.KeyFrameType;
 import com.smashbros.interfaces.IControllable;
 import com.smashbros.interfaces.IDrawable;
 import com.smashbros.interfaces.IHitbox;
+import com.smashbros.keyframes.KeyFrame;
+import com.smashbros.keyframes.KeyFrameList;
 
 import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -15,6 +19,7 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	private Rectangle vbox;
 	private Hitbox hbox;
 	private Hitbox gbox;
+	private KeyFrameList kList;
 	
 	public Character() {
 		super("character");
@@ -23,10 +28,17 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		Engine.addGraphic(vbox);
 		this.hbox = new Hitbox(this.vbox);
 		this.gbox = hbox;
+		this.kList = new KeyFrameList();
+		
+		kList.addKeyFrame(new KeyFrame(0, KeyFrameType.GRAVITY, 0));
 	}
 	
 	public void updateGhostBox(int xChange, int yChange) {
 		this.gbox = getModifiedHitbox(xChange, yChange);
+	}
+	
+	public void updateGhostBox(Point2D change) {
+		this.gbox = getModifiedHitbox((int)change.getX(), (int)change.getY());
 	}
 	
 	public Hitbox getModifiedHitbox(int xChange, int yChange) {		
@@ -36,10 +48,14 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	@Override
 	public void draw() {
 		
+		Point2D z = kList.getNextFrame();
+		System.out.println(z);
+		updateGhostBox(z);
+		
 		if (!EntityList.isCollidingGhostBox(eIndex, gbox)) {
 			this.x = gbox.getMinX();
 			this.y = gbox.getMinY();
-		}
+		} 
 		
 		vbox.setX(this.x);
 		vbox.setY(this.y);
@@ -47,7 +63,8 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 
 	@Override
 	public void jump() {
-		updateGhostBox(0, -5);
+		if (kList.numOfType(KeyFrameType.JUMPING) < 2 && !(kList.isOnCooldown(KeyFrameType.JUMPING)))
+			kList.addKeyFrame(new KeyFrame(60, KeyFrameType.JUMPING, 55));
 	}
 
 	@Override
