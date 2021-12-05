@@ -7,6 +7,7 @@ import com.smashbros.enums.KeyFrameType;
 import com.smashbros.interfaces.IControllable;
 import com.smashbros.interfaces.IDrawable;
 import com.smashbros.interfaces.IHitbox;
+import com.smashbros.interfaces.IHittable;
 import com.smashbros.keyframes.KeyFrame;
 import com.smashbros.keyframes.KeyFrameList;
 
@@ -15,12 +16,14 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class Character extends Entity implements IDrawable, IControllable, IHitbox {
+public class Character extends Entity implements IDrawable, IControllable, IHitbox, IHittable {
 	private Rectangle vbox;
 	private Hitbox hbox;
 	private Hitbox gbox;
 	private KeyFrameList kList;
 	private int jumpCount = 0;
+	private int health = 0;
+	private int lives = 3;
 	
 	public Character(int x, int y) {
 		super("character");
@@ -67,6 +70,10 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		
 		vbox.setX(this.x);
 		vbox.setY(this.y);
+		
+		// EntityList attack
+		if (isAttacking());
+		
 		this.hbox.updateFromGraphic();
 	}
 
@@ -92,10 +99,47 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	public void down() {
 		updateGhostBox(0, 5);		
 	}
+	
+	@Override
+	public void attack() {
+		kList.addKeyFrame(new KeyFrame(60, KeyFrameType.ATTACKING, 55));
+	}
 
 	@Override
 	public Hitbox getHitbox() {
 		return this.hbox;
+	}
+
+	@Override
+	public void setLives(int l) {
+		this.lives = l > 0 ? l : 0;
+	}
+
+	@Override
+	public int getLives() {
+		return this.lives;
+	}
+
+	@Override
+	public void setHealth(int h) {
+		this.health = h;
+	}
+
+	@Override
+	public int getHealth() {
+		return this.health;
+	}
+
+	@Override
+	public Color colorHealthIndicator() {
+		int green = 255-(health*2);
+		int red = health;
+		return new Color(red, green, 0, 1);
+	}
+
+	@Override
+	public boolean isAttacking() {
+		return kList.numOfType(KeyFrameType.ATTACKING) > 0 ? true : false;
 	}
 
 }

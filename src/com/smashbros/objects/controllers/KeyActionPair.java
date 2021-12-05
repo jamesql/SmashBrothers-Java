@@ -21,13 +21,15 @@ public class KeyActionPair {
 				new KeyActionPair(KeyCode.W, KeyAction.JUMP),
 				new KeyActionPair(KeyCode.A, KeyAction.LEFT),
 				new KeyActionPair(KeyCode.S, KeyAction.DOWN),
-				new KeyActionPair(KeyCode.D, KeyAction.RIGHT)
+				new KeyActionPair(KeyCode.D, KeyAction.RIGHT),
+				new KeyActionPair(KeyCode.R, KeyAction.ATTACK_GENERIC)
 		};
 		KeyActionPair[] arrow = new KeyActionPair[]{
 				new KeyActionPair(KeyCode.UP, KeyAction.JUMP),
 				new KeyActionPair(KeyCode.LEFT, KeyAction.LEFT),
 				new KeyActionPair(KeyCode.DOWN, KeyAction.DOWN),
 				new KeyActionPair(KeyCode.RIGHT, KeyAction.RIGHT),
+				new KeyActionPair(KeyCode.NUMPAD0, KeyAction.ATTACK_GENERIC)
 				
 		};
 		
