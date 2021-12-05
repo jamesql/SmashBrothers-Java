@@ -26,7 +26,6 @@ public class KeyFrame {
 		int y = (int) ((-1/maxFrames)*Math.pow(curFrame, 2)+curFrame);
 		
 		y/=8;
-		//System.out.println(curFrame + " - " + y);
 		
 		curFrame++;
 		return new Point2D(0, -y);
