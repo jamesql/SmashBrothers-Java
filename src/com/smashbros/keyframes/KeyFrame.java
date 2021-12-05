@@ -35,6 +35,10 @@ public class KeyFrame {
 		return new Point2D(0,3);
 	}
 	
+	private Point2D getNextAttackingFrame() {
+		return new Point2D(0,0);
+	}
+	
 	public Point2D getNextFrame() {
 		if (!hasFrames()) return null;
 		
@@ -43,11 +47,13 @@ public class KeyFrame {
 			return getNextJumpFrame();
 		case GRAVITY:
 			return getNextGravityFrame();
+		case ATTACKING:
+			return getNextAttackingFrame();
 		default:
 			return null;
 		}
 	}
-	
+
 	public boolean isOnCooldown() {
 		return !(curFrame > frameCooldown);
 	}
