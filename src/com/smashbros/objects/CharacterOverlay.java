@@ -3,10 +3,13 @@ package com.smashbros.objects;
 import com.smashbros.engine.Overlay;
 
 public class CharacterOverlay extends Overlay {
-
+	private Character c;
+	
 	public CharacterOverlay(Character c) {
 		super("sprite");
-		// TODO Auto-generated constructor stub
+		this.c = c;
+		this.x = c.getX();
+		this.y = c.getY();
 	}
 
 	@Override

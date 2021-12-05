@@ -1,5 +1,8 @@
 package com.smashbros.engine;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import com.smashbros.interfaces.IRunnable;
 import com.smashbros.objects.controllers.Controller;
 import com.smashbros.objects.controllers.KeyActionPair;
@@ -7,6 +10,7 @@ import com.smashbros.objects.controllers.KeyboardController;
 import com.smashbros.objects.Character;
 
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
@@ -41,6 +45,15 @@ public class Engine extends Window implements IRunnable {
 	
 	public static Pane getPane() {
 		return Engine.root;
+	}
+	
+	public static Image readImage(String fileName) {
+		try {
+			return new Image(new FileInputStream(String.format("src\\com\\smashbros\\assets\\", fileName)));
+		} catch (FileNotFoundException e) {
+			
+		}
+		return null;
 	}
 
 	@Override
