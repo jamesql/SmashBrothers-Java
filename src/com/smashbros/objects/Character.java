@@ -3,8 +3,8 @@ package com.smashbros.objects;
 import com.smashbros.engine.Engine;
 import com.smashbros.engine.Entity;
 import com.smashbros.engine.EntityList;
-import com.smashbros.enums.KeyFrameType;
 import com.smashbros.enums.Direction;
+import com.smashbros.enums.KeyFrameType;
 import com.smashbros.interfaces.IControllable;
 import com.smashbros.interfaces.IDrawable;
 import com.smashbros.interfaces.IHitbox;
@@ -27,14 +27,15 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	private HealthBar h;
 	private CharacterOverlay co; 
 	private Direction dir;
-
-	public Character() {
+	private int jumpCount = 0;
+	
+	public Character(int x, int y) {
 		super("character");
-		this.vbox = new Rectangle(500, 500, 50, 50);
+		this.vbox = new Rectangle(x, y, 50, 50);
 		vbox.setFill(Color.GOLD);
 		Engine.addGraphic(vbox);
 		this.hbox = new Hitbox(this.vbox);
-		this.gbox = hbox;
+		this.gbox = new Hitbox(this.vbox);
 		this.kList = new KeyFrameList();
 		
 		kList.addKeyFrame(new KeyFrame(100, KeyFrameType.GRAVITY, 0));
@@ -52,7 +53,12 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	}
 	
 	public Hitbox getModifiedHitbox(int xChange, int yChange) {		
-		return new Hitbox(gbox.getMinX()+xChange, gbox.getMinY()+yChange, gbox.getMaxX(), gbox.getMaxY());
+		Bounds vboxBounds = vbox.getBoundsInParent();
+		return new Hitbox(gbox.getMinX()+xChange, gbox.getMinY()+yChange, vboxBounds.getMaxX()+xChange, vboxBounds.getMaxY()+yChange);
+	}
+	
+	public void resetJump() {
+		jumpCount = 0;
 	}
 	
 	@Override
@@ -61,21 +67,25 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		Point2D z = kList.getNextFrame();
 		updateGhostBox(z);
 		
-		if (!EntityList.isCollidingGhostBox(eIndex, gbox)) {
+		int yChange = Math.abs(gbox.getMinY() - hbox.getMinY());
+		
+		if (!EntityList.isCollidingGhostBox(eIndex, gbox, yChange)) {
 			this.x = gbox.getMinX();
 			this.y = gbox.getMinY();
-		} 
+		} else 
+			gbox = new Hitbox(vbox);
 		
 		vbox.setX(this.x);
 		vbox.setY(this.y);
+		this.hbox.updateFromGraphic();
 	}
 
 	@Override
 	public void jump() {
-		if (kList.numOfType(KeyFrameType.JUMPING) < 2 && !(kList.isOnCooldown(KeyFrameType.JUMPING)))
+		if (!(kList.isOnCooldown(KeyFrameType.JUMPING)) && jumpCount < 2) {
 			kList.addKeyFrame(new KeyFrame(60, KeyFrameType.JUMPING, 55));
-		setHealth(this.health + 20);
-		setLives(this.lives - 1);
+			jumpCount++;
+		}
 	}
 
 	@Override
