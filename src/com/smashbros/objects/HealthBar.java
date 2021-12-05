@@ -4,8 +4,8 @@ import com.smashbros.engine.*;
 
 import java.util.ArrayList;
 
-import javafx.scene.Node;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
 
 public class HealthBar extends Overlay implements IDrawable {
     private Text perc = new Text();
-    private ArrayList<Rectangle> lives = new ArrayList<>();
+    private ArrayList<ImageView> lives = new ArrayList<>();
     private Character c;
     private int x;
     private int y;
@@ -62,10 +62,12 @@ public class HealthBar extends Overlay implements IDrawable {
     }
 
     public void setLives() {
+        Image icon = c.getCharOverlay().getIcon();
         for (int i = 0; i < c.getLives(); i++) {
-            Rectangle r = new Rectangle(20., 20.);
-            r.setFill(c.colorHealthIndicator());
-            this.lives.add(r);
+            ImageView tempIV = new ImageView(icon);
+            tempIV.setFitHeight(40.);
+            tempIV.setFitWidth(40.);
+            this.lives.add(tempIV);
         }
     }
 
@@ -77,7 +79,7 @@ public class HealthBar extends Overlay implements IDrawable {
     }
 
     private void addNodes() {
-        for(Node nd : lives) {
+        for(ImageView nd : lives) {
             overlayNodeList.add(nd);
         }
 
@@ -85,7 +87,7 @@ public class HealthBar extends Overlay implements IDrawable {
     }
 
     public void checkOrderHB() {
-        if(getHbCount() == 1) {
+        if(HealthBar.hbCount == 1) {
             setXY(100,575);
         } else {
             setXY(840,575);
@@ -100,7 +102,7 @@ public class HealthBar extends Overlay implements IDrawable {
         return hbCount;
     }
 
-    public ArrayList<Rectangle> getRect() {
+    public ArrayList<ImageView> getRect() {
         return lives;
     }
 

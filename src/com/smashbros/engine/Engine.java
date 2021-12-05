@@ -19,7 +19,7 @@ public class Engine extends Window implements IRunnable {
 		setup();
 		new KeyboardController(new Character());
 		new KeyboardController(new Character(), KeyActionPair.DEFAULT_ARROW);
-		new MapBackground("test");
+		new MapBackground("test", x, y);
 
 	}
 	

@@ -1,4 +1,5 @@
 package com.smashbros.objects;
+import com.smashbros.engine.Config;
 import com.smashbros.engine.Overlay;
 
 import javafx.scene.image.Image;
@@ -13,15 +14,15 @@ public class MapBackground extends Overlay {
     private Image i;
     private ImageView bg;
 
-    public MapBackground(String levelName) {
+    public MapBackground(String levelName, double windowX, double windowY) {
         super(levelName);
         this.ln = levelName;
         this.x = 0;
         this.y = 0;
         this.i = fetchImg();
         this.bg = new ImageView(i);
-        bg.maxHeight(640);
-        bg.setFitWidth(1080); 
+        bg.maxHeight(windowY);
+        bg.setFitWidth(windowX); 
         SpriteList.add(this.bg);
         this.addNodesToEngine();
         bg.toBack();

@@ -2,7 +2,6 @@ package com.smashbros.objects;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 import com.smashbros.engine.Overlay;
 import com.smashbros.enums.Direction;
@@ -13,18 +12,19 @@ import javafx.scene.transform.Rotate;
 
 public class CharacterOverlay extends Overlay implements IDrawable{
     private int x,y; 
-    private Image i;
+    private Image fullchar;
+    private Image icon;
     private ImageView sprite;
     private Character c;
-    private ArrayList<ImageView> CharacterSprites;
 
     public CharacterOverlay(Character c) {
         super("sprite");
         this.c = c;
         this.x = c.getX();
         this.y = c.getY();
-        this.i = makeImg();
-        this.sprite = new ImageView(i);
+        this.fullchar = fetchImg();
+        this.icon = fetchIcon();
+        this.sprite = new ImageView(fullchar);
         SpriteList.add(this.sprite);
         sprite.setRotationAxis(Rotate.Y_AXIS);
         sprite.setFitHeight(50);
@@ -33,7 +33,7 @@ public class CharacterOverlay extends Overlay implements IDrawable{
         this.addNodesToEngine();
     }
 
-    private Image makeImg(){
+    private Image fetchImg(){
         try {
             return new Image(new FileInputStream("src\\com\\smashbros\\assets\\placeholderChar.png"));
         } catch (FileNotFoundException e) {
@@ -42,8 +42,21 @@ public class CharacterOverlay extends Overlay implements IDrawable{
         return null;
     }
 
+    private Image fetchIcon() {
+        try {
+            return new Image(new FileInputStream("src\\com\\smashbros\\assets\\placeholderCharHB.png"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public ImageView getImg() {
         return sprite;
+    }
+
+    public Image getIcon() {
+        return icon;
     }
 
     public int getX() {

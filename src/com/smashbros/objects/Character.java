@@ -39,8 +39,8 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		
 		kList.addKeyFrame(new KeyFrame(100, KeyFrameType.GRAVITY, 0));
 		
-		this.h = new HealthBar(this);
 		this.co = new CharacterOverlay(this);
+		this.h = new HealthBar(this);
 	}
 	
 	public void updateGhostBox(int xChange, int yChange) {
@@ -124,6 +124,14 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	@Override
 	public Color colorHealthIndicator() {
 		return health < 100 ? Color.GREEN : Color.RED;
+	}
+
+	public HealthBar getHealthBar() {
+		return h;
+	}
+
+	public CharacterOverlay getCharOverlay() {
+		return co;
 	}
 
 	public int getX() {

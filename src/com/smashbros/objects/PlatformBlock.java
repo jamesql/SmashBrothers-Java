@@ -5,7 +5,6 @@ import com.smashbros.interfaces.IHitbox;
 
 public class PlatformBlock extends Entity implements IHitbox {
 	
-	
 	public PlatformBlock(String t) {
 		super("platform");
 	}
