@@ -21,7 +21,7 @@ public class Map {
 	
 	public void addBlock(int x, int y) {
 		PlatformBlock f = new PlatformBlock(x, y, blockWidth, blockHeight);
-		Engine.addGraphic(f.getGraphic());
+		Engine.addNode(f.getGraphic());
 		blocks.add(f);
 	}
 }

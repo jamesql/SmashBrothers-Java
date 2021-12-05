@@ -29,7 +29,7 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		super("character");
 		this.vbox = new Rectangle(x, y, 50, 50);
 		vbox.setFill(Color.GOLD);
-		Engine.addGraphic(vbox);
+		Engine.addNode(vbox);
 		this.hbox = new Hitbox(this.vbox);
 		this.gbox = new Hitbox(this.vbox);
 		this.kList = new KeyFrameList();

@@ -35,10 +35,6 @@ public class Engine extends Window implements IRunnable {
 		Tick.addToLoop(this);
 	}
 	
-	public static void addGraphic(Shape s) {
-		Engine.root.getChildren().add(s);
-	}
-	
 	public static void addNode(Node n) {
 		Engine.root.getChildren().add(n);
 	}
