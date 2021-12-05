@@ -6,6 +6,8 @@ import com.smashbros.objects.controllers.KeyActionPair;
 import com.smashbros.objects.controllers.KeyboardController;
 import com.smashbros.objects.Character;
 
+import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
@@ -35,6 +37,14 @@ public class Engine extends Window implements IRunnable {
 	
 	public static void addGraphic(Shape s) {
 		Engine.root.getChildren().add(s);
+	}
+	
+	public static void addNode(Node n) {
+		Engine.root.getChildren().add(n);
+	}
+	
+	public static Pane getPane() {
+		return Engine.root;
 	}
 
 	@Override
