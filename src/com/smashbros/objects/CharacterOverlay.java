@@ -35,7 +35,7 @@ public class CharacterOverlay extends Overlay implements IDrawable{
 
     private Image makeImg(){
         try {
-            return new Image(new FileInputStream("img\\placeholderChar.png"));
+            return new Image(new FileInputStream("src\\com\\smashbros\\assets\\placeholderChar.png"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

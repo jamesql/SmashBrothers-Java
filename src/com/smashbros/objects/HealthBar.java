@@ -5,7 +5,6 @@ import com.smashbros.engine.*;
 import java.util.ArrayList;
 
 import javafx.scene.Node;
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -14,18 +13,15 @@ import javafx.scene.text.Text;
 
 public class HealthBar extends Overlay implements IDrawable {
     private Text perc = new Text();
-    private Pane root;
     private ArrayList<Rectangle> lives = new ArrayList<>();
     private Character c;
     private int x;
     private int y;
     private static int hbCount = 0;
-    private ArrayList<Node> NodeList = new ArrayList<>();
     
     public HealthBar(Character c) {
         super("Hb");
         this.c = c;
-        this.root = Engine.getPane();
         addHbCount();
         setLives();
         setPercInterval();
@@ -76,15 +72,16 @@ public class HealthBar extends Overlay implements IDrawable {
     public void checkLives() {
         if(lives.size() > c.getLives()) {
             lives.get(lives.size()-1).setVisible(false);
+            lives.remove(lives.size()-1);
         }
     }
 
     private void addNodes() {
         for(Node nd : lives) {
-            n.add(nd);
+            overlayNodeList.add(nd);
         }
 
-        n.add(perc);
+        overlayNodeList.add(perc);
     }
 
     public void checkOrderHB() {
