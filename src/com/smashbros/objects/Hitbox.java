@@ -66,4 +66,14 @@ public class Hitbox {
 		return maxX >= hb.minX && minX <= hb.maxX && maxY >= hb.minY 
 				&& minY <= hb.maxY;
 	}
+	
+	public void changeY(int change) {
+		this.minY += change;
+		this.maxY += change;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("minX: %d, minY: %d, maxX: %d, maxY: %d", minX, minY, maxX, maxY);
+	}
 }

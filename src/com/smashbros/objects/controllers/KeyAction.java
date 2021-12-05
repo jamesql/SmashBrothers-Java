@@ -9,6 +9,6 @@ public enum KeyAction {
 	DODGE,
 	ATTACK_RIGHT,
 	ATTACK_LEFT,
-	ATTACK_UP,
+	ATTACK_UP, // figure attack system? combo?
 	ATTACK_DOWN
 }
