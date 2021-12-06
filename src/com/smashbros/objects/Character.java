@@ -29,6 +29,7 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	private CharacterOverlay chOverlay;
 	private HealthBar hb;
 	private String characterName;
+	private Point2D origin;
 	
 	public Character(int x, int y, String character) {
 		super("character");
@@ -40,6 +41,7 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		this.hbox = new Hitbox(this.vbox);
 		this.gbox = new Hitbox(this.vbox);
 		this.kList = new KeyFrameList();
+		this.origin = new Point2D(x, y);
 		
 		hb = new HealthBar(this);
 
@@ -57,6 +59,12 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	public Hitbox getModifiedHitbox(int xChange, int yChange) {		
 		Bounds vboxBounds = vbox.getBoundsInParent();
 		return new Hitbox(gbox.getMinX()+xChange, gbox.getMinY()+yChange, vboxBounds.getMaxX()+xChange, vboxBounds.getMaxY()+yChange);
+	}
+	
+	public void resetBox() {
+		vbox.setX(origin.getX());
+		vbox.setY(origin.getY());
+		this.gbox = new Hitbox(vbox);
 	}
 	
 	public void resetJump() {
@@ -92,6 +100,9 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		if (isAttacking());
 		
 		this.hbox.updateFromGraphic();
+		
+		if (y > 850 || x < -100 || x > 1400) die();
+		
 	}
 
 	@Override
@@ -159,6 +170,15 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	@Override
 	public boolean isAttacking() {
 		return kList.numOfType(KeyFrameType.ATTACKING) > 0 ? true : false;
+	}
+
+	@Override
+	public void die() {
+		setLives(this.lives-1);
+		
+		if (lives > 0) resetBox();
+		else resetBox(); // dead for good
+		
 	}
 
 }

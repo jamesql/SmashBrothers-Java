@@ -14,4 +14,6 @@ public interface IHittable {
     public Color colorHealthIndicator();
     
     public boolean isAttacking();
+    
+    public void die();
 }
