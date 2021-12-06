@@ -18,14 +18,17 @@ public abstract class Overlay {
     	this.type = t;
     	this.oIndex = ++overlayCount;
     	OverlayList.addOverlay(this);
-    	addNodesToEngine();
     }
     
     protected void addNodesToEngine() {
-    	for (Node n : overlayNodeList)
+    	for (Node n : overlayNodeList) {
+    		n.toFront();
     		Engine.addNode(n);
-    	for (ImageView i : spriteList)
+    	}
+    	for (ImageView i : spriteList) {
+    		i.toFront();
     		Engine.addNode(i);
+    	}
     }
     
 	public abstract void render();

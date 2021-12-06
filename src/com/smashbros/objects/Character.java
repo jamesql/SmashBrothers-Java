@@ -26,12 +26,14 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	private int health = 0;
 	private int lives = 3;
 	private Direction dir = Direction.RIGHT;
+	private CharacterOverlay chOverlay;
 	
 	public Character(int x, int y) {
 		super("character");
 		this.vbox = new Rectangle(x, y, 50, 50);
-		vbox.setFill(Color.GOLD);
+		vbox.setFill(Color.TRANSPARENT);
 		Engine.addNode(vbox);
+		chOverlay = new CharacterOverlay(this);
 		this.hbox = new Hitbox(this.vbox);
 		this.gbox = new Hitbox(this.vbox);
 		this.kList = new KeyFrameList();
