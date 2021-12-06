@@ -46,6 +46,10 @@ public class CharacterOverlay extends Overlay {
 			break;
 		}
 	}
+	
+	public Image getIcon() {
+		return this.icon;
+	}
 
 	@Override
 	public void render() {
