@@ -27,6 +27,7 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	private int lives = 3;
 	private Direction dir = Direction.RIGHT;
 	private CharacterOverlay chOverlay;
+	private HealthBar hb;
 	private String characterName;
 	
 	public Character(int x, int y, String character) {
@@ -40,6 +41,8 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		this.gbox = new Hitbox(this.vbox);
 		this.kList = new KeyFrameList();
 		
+		hb = new HealthBar(this);
+
 		kList.addKeyFrame(new KeyFrame(100, KeyFrameType.GRAVITY, 0));
 	}
 	
@@ -62,6 +65,10 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	
 	public Direction getDir() {
 		return this.dir;
+	}
+	
+	public CharacterOverlay getOverlay() {
+		return this.chOverlay;
 	}
 	
 	@Override
@@ -109,7 +116,7 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 
 	@Override
 	public void down() {
-		updateGhostBox(0, 5);		
+		updateGhostBox(0, 8);		
 	}
 	
 	@Override
@@ -144,8 +151,8 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 
 	@Override
 	public Color colorHealthIndicator() {
-		int green = 255-(health*2);
-		int red = health;
+		int green = 1-((health/255)*2);
+		int red = health/255;
 		return new Color(red, green, 0, 1);
 	}
 
