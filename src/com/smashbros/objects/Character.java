@@ -97,7 +97,7 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		vbox.setY(this.y);
 		
 		// EntityList attack
-		if (isAttacking());
+		if (isAttacking()) System.out.println("attacking");
 		
 		this.hbox.updateFromGraphic();
 		
@@ -132,7 +132,7 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	
 	@Override
 	public void attack() {
-		kList.addKeyFrame(new KeyFrame(60, KeyFrameType.ATTACKING, 55));
+		kList.addKeyFrame(new KeyFrame(30, KeyFrameType.ATTACKING, 25));
 	}
 
 	@Override
