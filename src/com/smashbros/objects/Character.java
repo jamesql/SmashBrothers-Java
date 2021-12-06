@@ -116,7 +116,7 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 
 	@Override
 	public void down() {
-		updateGhostBox(0, 5);		
+		updateGhostBox(0, 8);		
 	}
 	
 	@Override
