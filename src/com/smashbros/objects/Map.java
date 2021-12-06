@@ -18,6 +18,7 @@ public class Map extends Overlay {
 	
 	public Map(String levelName) {
 		super(levelName);
+		cfg.set("currentMap", levelName);
 		this.ln = levelName;
 		this.i = Engine.readImage(String.format("map-%s.png", levelName));
 		this.bg = new ImageView(i);
