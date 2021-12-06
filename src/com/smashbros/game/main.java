@@ -20,6 +20,10 @@ public class Main extends Application {
 	public static void setupConfig() {
 		cfg.add("windowX", 1280.); // doubles
 		cfg.add("windowY", 720.);
+		
+		
+		// character file names
+		cfg.add("ch-default", "default.png");
 	}
 	
 	@Override

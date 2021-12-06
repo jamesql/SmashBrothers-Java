@@ -3,6 +3,7 @@ package com.smashbros.objects;
 import com.smashbros.engine.Engine;
 import com.smashbros.engine.Entity;
 import com.smashbros.engine.EntityList;
+import com.smashbros.enums.Direction;
 import com.smashbros.enums.KeyFrameType;
 import com.smashbros.interfaces.IControllable;
 import com.smashbros.interfaces.IDrawable;
@@ -24,6 +25,7 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	private int jumpCount = 0;
 	private int health = 0;
 	private int lives = 3;
+	private Direction dir = Direction.RIGHT;
 	
 	public Character(int x, int y) {
 		super("character");
@@ -52,6 +54,10 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	
 	public void resetJump() {
 		jumpCount = 0;
+	}
+	
+	public Direction getDir() {
+		return this.dir;
 	}
 	
 	@Override
@@ -88,11 +94,13 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	@Override
 	public void left() {
 		updateGhostBox(-5, 0);
+		dir = Direction.LEFT;
 	}
 
 	@Override
 	public void right() {
-		updateGhostBox(5, 0);		
+		updateGhostBox(5, 0);	
+		dir = Direction.RIGHT;
 	}
 
 	@Override
