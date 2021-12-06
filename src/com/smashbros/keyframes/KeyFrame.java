@@ -36,6 +36,7 @@ public class KeyFrame {
 	}
 	
 	private Point2D getNextAttackingFrame() {
+		curFrame++;
 		return new Point2D(0,0);
 	}
 	
