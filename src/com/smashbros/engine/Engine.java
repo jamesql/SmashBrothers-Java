@@ -5,7 +5,6 @@ import com.smashbros.objects.controllers.Controller;
 import com.smashbros.objects.controllers.KeyActionPair;
 import com.smashbros.objects.controllers.KeyboardController;
 import com.smashbros.objects.Character;
-import com.smashbros.objects.MapBackground;
 
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
@@ -17,7 +16,6 @@ public class Engine extends Window implements IRunnable {
 	public Engine(double x, double y, Stage s) {
 		super(x, y, s);
 		setup();
-		new MapBackground("test", x, y);
 		new KeyboardController(new Character(400, 200));
 		new KeyboardController(new Character(650, 100), KeyActionPair.DEFAULT_ARROW);
 

@@ -22,10 +22,12 @@ public class Overlay {
 
     protected void addNodesToEngine() {
         for(Node node : overlayNodeList) {
+            node.toFront();
             Engine.addGraphic(node);
         }
 
         for(ImageView i : SpriteList) {
+            i.toFront();
             Engine.addImage(i);
         }
     }

@@ -9,20 +9,17 @@ import java.io.FileNotFoundException;
 
 public class MapBackground extends Overlay {
     String ln;
-    private int x;
-    private int y; 
     private Image i;
     private ImageView bg;
+    Config cfg = Config.instance();
 
-    public MapBackground(String levelName, double windowX, double windowY) {
+    public MapBackground(String levelName) {
         super(levelName);
         this.ln = levelName;
-        this.x = 0;
-        this.y = 0;
         this.i = fetchImg();
         this.bg = new ImageView(i);
-        bg.maxHeight(windowY);
-        bg.setFitWidth(windowX); 
+        bg.maxHeight(cfg.get("windowY"));
+        bg.setFitWidth(cfg.get("windowX")); 
         SpriteList.add(this.bg);
         this.addNodesToEngine();
         bg.toBack();
