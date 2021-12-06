@@ -26,7 +26,6 @@ public class Map extends Overlay {
 		spriteList.add(this.bg);
 		this.addNodesToEngine();
 		bg.toBack();
-
 	}
 	
 	public void addPlatformRow(int x, int y, int blocks) {

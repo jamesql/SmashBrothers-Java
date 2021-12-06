@@ -23,7 +23,7 @@ public class Main extends Application {
 		
 		
 		// character file names
-		cfg.add("ch-default", "default.png");
+		cfg.add("currentMap", "default");
 	}
 	
 	@Override

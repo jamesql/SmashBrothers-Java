@@ -20,8 +20,8 @@ public class Engine extends Window implements IRunnable {
 	public Engine(double x, double y, Stage s) {
 		super(x, y, s);
 		setup();
-		new KeyboardController(new Character(400, 200));
-		new KeyboardController(new Character(650, 100), KeyActionPair.DEFAULT_ARROW);
+		new KeyboardController(new Character(400, 200, "default"));
+		new KeyboardController(new Character(650, 100, "default"), KeyActionPair.DEFAULT_ARROW);
 
 	}
 	

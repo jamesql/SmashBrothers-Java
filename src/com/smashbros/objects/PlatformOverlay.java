@@ -1,5 +1,6 @@
 package com.smashbros.objects;
 
+import com.smashbros.engine.Config;
 import com.smashbros.engine.Engine;
 import com.smashbros.engine.Overlay;
 import com.smashbros.enums.EndBlocks;
@@ -9,7 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.transform.Rotate;
 
 public class PlatformOverlay extends Overlay {
-	private String map = "default";
+	private String map = Config.instance().get("currentMap");
 	private PlatformBlock block;
 	private EndBlocks type;
 	private Image middleImg;

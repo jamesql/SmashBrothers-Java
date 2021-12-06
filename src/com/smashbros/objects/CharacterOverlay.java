@@ -12,15 +12,20 @@ public class CharacterOverlay extends Overlay {
 	private Image chrImg;
 	private Image icon;
 	private ImageView sprite;
+	private String characterName;
 	
-	public CharacterOverlay(Character c) {
+	public CharacterOverlay(Character c, String characterName) {
 		super("sprite");
 		this.c = c;
 		this.x = c.getX();
 		this.y = c.getY();
+		this.characterName = characterName;
 		
-		this.chrImg = Engine.readImage("placeholderChar.png");
-		this.icon = Engine.readImage("placeholderCharHB.png");
+		String imgDir = String.format("ch-%s.png", characterName);
+		String iconDir = String.format("icon-%s.png", characterName);
+
+		this.chrImg = Engine.readImage(imgDir);
+		this.icon = Engine.readImage(iconDir);
 		this.sprite = new ImageView(chrImg);
 		
 		spriteList.add(sprite);
