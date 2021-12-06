@@ -77,11 +77,13 @@ public class HealthBar extends Overlay {
 		perc.setY(this.y);
 	}
 
-	// TODO : OverlayList.getNumHealthbars(); : int
 	public void setHealthBarPos() {
+		
+		int[][] pos = {{50,100}, {1080, 100}, {50, 600}, {1080, 600}};
+		
 		if (hbCount == 1) 
-			setPos(100,575);
-			else setPos(900,575);
+			setPos(pos[0][0],pos[0][1]);
+			else setPos(pos[1][0],pos[1][1]);
 	}
 	
 	public void addNodes() {
