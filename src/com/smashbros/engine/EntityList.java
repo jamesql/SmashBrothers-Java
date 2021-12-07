@@ -2,7 +2,6 @@ package com.smashbros.engine;
 
 import java.util.ArrayList;
 
-import com.smashbros.enums.Direction;
 import com.smashbros.interfaces.IDrawable;
 import com.smashbros.interfaces.IHitbox;
 import com.smashbros.interfaces.IRunnable;
