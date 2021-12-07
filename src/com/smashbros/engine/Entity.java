@@ -15,12 +15,4 @@ public class Entity {
 	public boolean isColliding() {
 		return EntityList.isColliding(this);
 	}
-	
-	public int getX() {
-		return this.x;
-	}
-	
-	public int getY() {
-		return this.y;
-	}
 }

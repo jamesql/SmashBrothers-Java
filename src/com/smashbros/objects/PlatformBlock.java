@@ -8,9 +8,11 @@ import javafx.scene.shape.Rectangle;
 public class PlatformBlock extends Entity implements IHitbox {
 	private Rectangle graphic;
 	private Hitbox hbox;
-	private int h;
+	private int x;
+	private int y;
 	private int w;
-	private PlatformOverlay overlay;
+	private int h;
+	private PlatformOverlay po;
 	
 	public PlatformBlock(int x, int y, int w, int h) {
 		super("platform");
@@ -19,9 +21,9 @@ public class PlatformBlock extends Entity implements IHitbox {
 		this.w = w;
 		this.h = h;
 		this.graphic = new Rectangle(x, y, w, h);
-		this.hbox = new Hitbox(graphic);
 		graphic.setVisible(false);
-		this.overlay = new PlatformOverlay(this);
+		this.hbox = new Hitbox(graphic);
+		this.po = new PlatformOverlay(this);
 	}
 
 	@Override
@@ -32,17 +34,25 @@ public class PlatformBlock extends Entity implements IHitbox {
 	public Rectangle getGraphic() {
 		return this.graphic;
 	}
-	
-	public PlatformOverlay getOverlay() {
-		return this.overlay;
+
+	public int getX() {
+		return this.x;
 	}
-	
-	public int getWidth() {
-		return this.w;
+
+	public int getY() {
+		return this.y;
 	}
-	
-	public int getHeight() {
+
+	public int getW() {
+		return this.w; 
+	}
+
+	public int getH() {
 		return this.h;
 	}
 
+	public PlatformOverlay getOverlay() {
+		return this.po;
+	}
+	
 }

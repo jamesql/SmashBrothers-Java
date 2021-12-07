@@ -25,17 +25,6 @@ public class ConfigData {
 		return null;
 	}
 	
-	public <T> void set(String key, T value) {
-		ArrayList<KeyValue<?>> delList = new ArrayList<KeyValue<?>>();
-		
-		for (KeyValue<?> kv : list)
-			if (kv.getKey().equals(key)) delList.add(kv);
-		
-		list.removeAll(delList);
-		
-		add(key, value);
-	}
-	
 	public ArrayList<KeyValue<?>> getList() {
 		return list;
 	}

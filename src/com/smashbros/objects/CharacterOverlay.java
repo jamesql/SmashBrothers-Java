@@ -1,61 +1,89 @@
 package com.smashbros.objects;
 
-import com.smashbros.engine.Engine;
-import com.smashbros.engine.Overlay;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
+import com.smashbros.engine.Overlay;
+import com.smashbros.enums.Direction;
+import com.smashbros.interfaces.IDrawable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.transform.Rotate;
 
-public class CharacterOverlay extends Overlay {
-	private Character c;
-	private Image chrImg;
-	private Image icon;
-	private ImageView sprite;
-	private String characterName;
-	
-	public CharacterOverlay(Character c, String characterName) {
-		super("sprite");
-		this.c = c;
-		this.x = c.getX();
-		this.y = c.getY();
-		this.characterName = characterName;
-		
-		String imgDir = String.format("ch-%s.png", characterName);
-		String iconDir = String.format("icon-%s.png", characterName);
+public class CharacterOverlay extends Overlay implements IDrawable{
+    private int x,y; 
+    private Image fullchar;
+    private Image icon;
+    private ImageView sprite;
+    private Character c;
 
-		this.chrImg = Engine.readImage(imgDir);
-		this.icon = Engine.readImage(iconDir);
-		this.sprite = new ImageView(chrImg);
-		
-		spriteList.add(sprite);
-		sprite.setRotationAxis(Rotate.Y_AXIS);
-		sprite.setFitHeight(50);
-		sprite.setFitWidth(50);
-		
-		this.addNodesToEngine();
-	}
-	
-	public void setDir() {
-		switch (c.getDir()) {
-		case LEFT:
-			sprite.setRotate(180);
-			break;
-		case RIGHT:
-			sprite.setRotate(0);
-			break;
-		}
-	}
-	
-	public Image getIcon() {
-		return this.icon;
-	}
+    public CharacterOverlay(Character c) {
+        super("sprite");
+        this.c = c;
+        this.x = c.getX();
+        this.y = c.getY();
+        this.fullchar = fetchImg();
+        this.icon = fetchIcon();
+        this.sprite = new ImageView(fullchar);
+        SpriteList.add(this.sprite);
+        sprite.setRotationAxis(Rotate.Y_AXIS);
+        sprite.setFitHeight(50);
+        sprite.setFitWidth(50);
+        
+        this.addNodesToEngine();
+    }
 
-	@Override
-	public void render() {
-		sprite.setX(c.getX());
-		sprite.setY(c.getY());
-		setDir();
-	}
+    private Image fetchImg(){
+        try {
+            return new Image(new FileInputStream("src\\com\\smashbros\\assets\\placeholderChar.png"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
+    private Image fetchIcon() {
+        try {
+            return new Image(new FileInputStream("src\\com\\smashbros\\assets\\placeholderCharHB.png"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ImageView getImg() {
+        return sprite;
+    }
+
+    public Image getIcon() {
+        return icon;
+    }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
+    private void checkDir() {
+        if(c.getDir() == Direction.LEFT) {
+            sprite.setRotate(180);
+        } else if(c.getDir() == Direction.RIGHT) {
+            sprite.setRotate(0);
+        }
+    }
+
+    public void moveImg() {
+        sprite.setX(c.getX());
+        sprite.setY(c.getY());  
+        checkDir();
+    }
+
+    @Override
+    public void draw() {
+        moveImg();
+    }
 }
+
