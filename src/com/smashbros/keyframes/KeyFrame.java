@@ -1,6 +1,7 @@
 package com.smashbros.keyframes;
 
 import com.smashbros.enums.KeyFrameType;
+import com.smashbros.objects.Character;
 
 import javafx.geometry.Point2D;
 
@@ -9,11 +10,13 @@ public class KeyFrame {
 	private int maxFrames;
 	private int frameCooldown;
 	private KeyFrameType type;
+	private Character c;
 	
-	public KeyFrame(int frames, KeyFrameType type, int cooldown) {
+	public KeyFrame(Character c, int frames, KeyFrameType type, int cooldown) {
 		this.maxFrames = frames;
 		this.type = type;
 		this.frameCooldown = cooldown;
+		this.c = c;
 	}
 	
 	public Point2D getNextJumpFrame() {		
@@ -41,8 +44,11 @@ public class KeyFrame {
 	}
 	
 	private Point2D getNextKnockbackFrame() {
+		int x = maxFrames - curFrame;
+		
+		
 		curFrame++;
-		return new Point2D(5,0);
+		return new Point2D(x,0);
 	}
 	
 	public Point2D getNextFrame() {
