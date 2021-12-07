@@ -5,30 +5,31 @@ import java.util.ArrayList;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
-public class Overlay {
-    protected int x,y;
-	private static int overlayCount = 0;
+public abstract class Overlay {
+	protected int x,y;
 	protected int oIndex;
 	protected String type;
+	private static int overlayCount = 0;
+	
     protected ArrayList<Node> overlayNodeList = new ArrayList<>();
-    protected ArrayList<ImageView> SpriteList = new ArrayList<>();
-
-	public Overlay(String t) {
-		OverlayList.addOverlay(this);
-        addNodesToEngine();
-		this.oIndex = ++overlayCount;
-		this.type = t;
-	}
-
-    protected void addNodesToEngine() {
-        for(Node node : overlayNodeList) {
-            node.toFront();
-            Engine.addGraphic(node);
-        }
-
-        for(ImageView i : SpriteList) {
-            i.toFront();
-            Engine.addImage(i);
-        }
+    protected ArrayList<ImageView> spriteList = new ArrayList<>();
+    
+    public Overlay(String t) {
+    	this.type = t;
+    	this.oIndex = ++overlayCount;
+    	OverlayList.addOverlay(this);
     }
+    
+    protected void addNodesToEngine() {
+    	for (Node n : overlayNodeList) {
+    		n.toFront();
+    		Engine.addNode(n);
+    	}
+    	for (ImageView i : spriteList) {
+    		i.toFront();
+    		Engine.addNode(i);
+    	}
+    }
+    
+	public abstract void render();
 }

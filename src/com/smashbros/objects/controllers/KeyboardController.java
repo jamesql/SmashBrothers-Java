@@ -47,6 +47,12 @@ public class KeyboardController extends Controller {
 			case RIGHT:
 				cEntity.right();
 				break;
+			case ATTACK_GENERIC:
+				cEntity.attack();
+				break;
+			case BLOCK:
+				cEntity.block();
+				break;
 			default: break;
 			}
 		}

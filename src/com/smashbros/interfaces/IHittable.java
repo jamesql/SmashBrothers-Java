@@ -12,4 +12,10 @@ public interface IHittable {
     public int getHealth();
 
     public Color colorHealthIndicator();
+  
+    public boolean isAttacking();
+    
+    public boolean isBlocking();
+    
+    public void die();
 }

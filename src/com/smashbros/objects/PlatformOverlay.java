@@ -1,7 +1,7 @@
 package com.smashbros.objects;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
+import com.smashbros.engine.Config;
+import com.smashbros.engine.Engine;
 import com.smashbros.engine.Overlay;
 import com.smashbros.enums.EndBlocks;
 
@@ -9,64 +9,59 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.transform.Rotate;
 
+public class PlatformOverlay extends Overlay {
+	private String map = Config.instance().get("currentMap");
+	private PlatformBlock block;
+	private EndBlocks type;
+	private Image middleImg;
+	private Image endImg;
+	private ImageView blockImg;
+	
+	public PlatformOverlay(PlatformBlock p) {
+		super("blockOverlay");
+		this.block = p;
+		this.x = p.getX();
+		this.y = p.getY();
+		readImages();
+		this.blockImg = new ImageView(middleImg);
+		blockImg.setRotationAxis(Rotate.Y_AXIS);
+		blockImg.setFitHeight(block.getHeight());
+		blockImg.setFitWidth(block.getWidth());
 
-public class PlatformOverlay extends Overlay{
-    private static String middleLoc = "src\\com\\smashbros\\assets\\block.png";
-    private static String endLoc = "src\\com\\smashbros\\assets\\endBlock.png";
-    private Image middleblock = fetchImg(middleLoc);
-    private Image endblock = fetchImg(endLoc);
-    private ImageView blockimg;
-    private int x;
-    private int y;
-    private PlatformBlock block;
+		setPos();
+		
+		spriteList.add(this.blockImg);
+		this.addNodesToEngine();
+	}
+	
+	public void setBlockType(EndBlocks type) {
+		this.type = type;
+		switch(this.type) {
+		case LEFTEND:
+			blockImg.setImage(endImg);
+			break;
+		case RIGHTEND:
+			blockImg.setImage(endImg);
+			blockImg.setRotate(180);
+			break;
+		case MIDDLE:
+				break;
+		}
+	}
+	
+	public void readImages() {
+		this.middleImg = Engine.readImage(String.format("mapblock-%s-middle.png", map));
+		this.endImg = Engine.readImage(String.format("mapblock-%s-end.png", map));
+	}
+	
+	private void setPos() {
+		blockImg.setX(block.getX());
+		blockImg.setY(block.getY());
+	}
+	
 
-    public PlatformOverlay(PlatformBlock p) {
-        super("blockOverlay");
-        this.block = p;
-        this.x = block.getX();
-        this.y = block.getY();
-        this.blockimg = new ImageView(middleblock);
-        blockimg.setRotationAxis(Rotate.Y_AXIS);
-        blockimg.setFitHeight(block.getH());
-        blockimg.setFitWidth(block.getW());
-        setXY();
-        SpriteList.add(this.blockimg);
-        this.addNodesToEngine();
-    }
-
-
-    private Image fetchImg(String loc) {
-        try {
-            return new Image(new FileInputStream(loc));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public ImageView getImg() {
-        return blockimg;
-    }
-
-    public void setEndBlockImg(Enum endCase) {
-        if(endCase.equals(EndBlocks.LEFTEND)) {
-            blockimg.setImage(endblock);
-        } else if(endCase.equals(EndBlocks.RIGHTEND)) {
-            blockimg.setImage(endblock);
-            blockimg.setRotate(180);
-        }
-    }
-
-    private void setXY() {
-        blockimg.setX(block.getX());
-        blockimg.setY(block.getY());
-    }
-
-    public int getX() {
-        return this.x;
-    }
-
-    public int getY() {
-        return this.y;
-    }
+	@Override
+	public void render() {
+		// unused, add moving platforms cuz
+	}
 }

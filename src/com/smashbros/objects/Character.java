@@ -28,16 +28,29 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	private CharacterOverlay co; 
 	private Direction dir;
 	private int jumpCount = 0;
+	private int health = 0;
+	private int lives = 3;
+	private Direction dir = Direction.RIGHT;
+	private CharacterOverlay chOverlay;
+	private HealthBar hb;
+	private String characterName;
+	private Point2D origin;
+	private boolean blocking = false;
 	
-	public Character(int x, int y) {
+	public Character(int x, int y, String character) {
 		super("character");
 		this.vbox = new Rectangle(x, y, 50, 50);
-		vbox.setFill(Color.GOLD);
-		Engine.addGraphic(vbox);
+		vbox.setFill(Color.TRANSPARENT);
+		Engine.addNode(vbox);
+		this.characterName = character;
+		chOverlay = new CharacterOverlay(this, character);
 		this.hbox = new Hitbox(this.vbox);
 		this.gbox = new Hitbox(this.vbox);
 		this.kList = new KeyFrameList();
+		this.origin = new Point2D(x, y);
 		
+		hb = new HealthBar(this);
+
 		kList.addKeyFrame(new KeyFrame(100, KeyFrameType.GRAVITY, 0));
 		
 		this.co = new CharacterOverlay(this);
@@ -57,8 +70,31 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		return new Hitbox(gbox.getMinX()+xChange, gbox.getMinY()+yChange, vboxBounds.getMaxX()+xChange, vboxBounds.getMaxY()+yChange);
 	}
 	
+	public void resetBox() {
+		vbox.setX(origin.getX());
+		vbox.setY(origin.getY());
+		this.gbox = new Hitbox(vbox);
+	}
+	
 	public void resetJump() {
 		jumpCount = 0;
+	}
+	
+	public Direction getDir() {
+		return this.dir;
+	}
+	
+	public CharacterOverlay getOverlay() {
+		return this.chOverlay;
+	}
+	
+	public boolean isFrozen() {
+		return kList.numOfType(KeyFrameType.KNOCKBACK) > 0;
+	}
+	
+	public void knockback(Direction d) {
+		dir = d;
+		kList.addKeyFrame(new KeyFrame(15, KeyFrameType.KNOCKBACK, 15));
 	}
 	
 	@Override
@@ -77,7 +113,14 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		
 		vbox.setX(this.x);
 		vbox.setY(this.y);
+		
+		// EntityList attack
+		if (isAttacking()) EntityList.checkAttackingHits(this);
+		
 		this.hbox.updateFromGraphic();
+		
+		if (y > 850 || x < -100 || x > 1400) die();
+		
 	}
 
 	@Override
@@ -90,20 +133,35 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 
 	@Override
 	public void left() {
+		if (isFrozen()) return;
 		updateGhostBox(-5, 0);
 		dir = Direction.LEFT;
-
 	}
 
 	@Override
 	public void right() {
+		if (isFrozen()) return;
 		updateGhostBox(5, 0);	
-		dir = Direction.RIGHT;	
+		dir = Direction.RIGHT;
 	}
 
 	@Override
 	public void down() {
-		updateGhostBox(0, 5);		
+		if (isFrozen()) return;
+		updateGhostBox(0, 8);		
+	}
+	
+	@Override
+	public void attack() {
+		if (isFrozen()) return;
+		kList.addKeyFrame(new KeyFrame(5, KeyFrameType.ATTACKING, 9));
+	}
+	
+	@Override
+	public void block() {
+		if (isFrozen()) return;
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -113,7 +171,7 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 
 	@Override
 	public void setLives(int l) {
-		this.lives = lives > 0 ? l : 0;
+		this.lives = l > 0 ? l : 0;
 	}
 
 	@Override
@@ -133,27 +191,32 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 
 	@Override
 	public Color colorHealthIndicator() {
-		return health < 100 ? Color.GREEN : Color.RED;
+		double hHealth = health > 125 ? 125 : health;
+		double green = 1-((hHealth/255.0)*2);
+		double red = hHealth/255;
+		
+		red = red > 1.0 ? 1.0 : red;
+		green = green < 0.0 ? 0.0 : green;
+		return new Color(red, green, 0, 1);
 	}
 
-	public HealthBar getHealthBar() {
-		return h;
+	@Override
+	public boolean isAttacking() {
+		return kList.numOfType(KeyFrameType.ATTACKING) > 0 ? true : false;
 	}
 
-	public CharacterOverlay getCharOverlay() {
-		return co;
+	@Override
+	public void die() {
+		setLives(this.lives-1);
+		
+		if (lives > 0) resetBox();
+		else resetBox(); // dead for good
+		
 	}
 
-	public int getX() {
-		return this.x;
-	}
-
-	public int getY() {
-		return this.y;
-	}
-
-	public Direction getDir() {
-		return dir;
+	@Override
+	public boolean isBlocking() {
+		return this.blocking;
 	}
 
 }
