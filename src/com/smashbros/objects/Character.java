@@ -46,7 +46,7 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		
 		hb = new HealthBar(this);
 
-		kList.addKeyFrame(new KeyFrame(100, KeyFrameType.GRAVITY, 0));
+		kList.addKeyFrame(new KeyFrame(this, 100, KeyFrameType.GRAVITY, 0));
 	}
 	
 	public void updateGhostBox(int xChange, int yChange) {
@@ -86,13 +86,18 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	
 	public void knockback(Direction d) {
 		dir = d;
-		kList.addKeyFrame(new KeyFrame(15, KeyFrameType.KNOCKBACK, 15));
+		kList.addKeyFrame(new KeyFrame(this, 15, KeyFrameType.KNOCKBACK, 15));
+	}
+	
+	public void resetKeyFrames() {
+		kList.clearList();
+		kList.addKeyFrame(new KeyFrame(this, 100, KeyFrameType.GRAVITY, 0));
 	}
 	
 	@Override
 	public void draw() {
 		
-		Point2D z = kList.getNextFrame();
+		Point2D z = kList.getNextFrame(this.dir);
 		updateGhostBox(z);
 		
 		int yChange = Math.abs(gbox.getMinY() - hbox.getMinY());
@@ -118,7 +123,7 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	@Override
 	public void jump() {
 		if (!(kList.isOnCooldown(KeyFrameType.JUMPING)) && jumpCount < 2) {
-			kList.addKeyFrame(new KeyFrame(60, KeyFrameType.JUMPING, 55));
+			kList.addKeyFrame(new KeyFrame(this, 60, KeyFrameType.JUMPING, 55));
 			jumpCount++;
 		}
 	}
@@ -146,7 +151,7 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	@Override
 	public void attack() {
 		if (isFrozen()) return;
-		kList.addKeyFrame(new KeyFrame(5, KeyFrameType.ATTACKING, 9));
+		kList.addKeyFrame(new KeyFrame(this, 5, KeyFrameType.ATTACKING, 9));
 	}
 	
 	@Override
@@ -200,6 +205,8 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	@Override
 	public void die() {
 		setLives(this.lives-1);
+		setHealth(0);
+		resetKeyFrames();
 		
 		if (lives > 0) resetBox();
 		else resetBox(); // dead for good

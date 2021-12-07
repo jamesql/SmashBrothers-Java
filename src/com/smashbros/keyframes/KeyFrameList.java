@@ -2,6 +2,7 @@ package com.smashbros.keyframes;
 
 import java.util.ArrayList;
 
+import com.smashbros.enums.Direction;
 import com.smashbros.enums.KeyFrameType;
 
 import javafx.geometry.Point2D;
@@ -13,7 +14,7 @@ public class KeyFrameList {
 		
 	}
 	
-	public Point2D getNextFrame() {
+	public Point2D getNextFrame(Direction dir) {
 		collectGarbage();
 		double x=0, y=0;
 		
@@ -26,6 +27,8 @@ public class KeyFrameList {
 			x += t.getX();
 			y += t.getY();
 		}
+		
+		x = dir.equals(Direction.RIGHT)?x:-x;
 		
 		Point2D p = new Point2D(x, y);
 		return p;
@@ -50,6 +53,10 @@ public class KeyFrameList {
 		for (KeyFrame k : list)
 			if(k.getType().equals(type)) c++;
 		return c;
+	}
+	
+	public void clearList() {
+		list.clear();
 	}
 	
 }
