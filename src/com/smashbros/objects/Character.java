@@ -22,11 +22,6 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	private Hitbox hbox;
 	private Hitbox gbox;
 	private KeyFrameList kList;
-	private int health = 0; 
-	private int lives = 3;
-	private HealthBar h;
-	private CharacterOverlay co; 
-	private Direction dir;
 	private int jumpCount = 0;
 	private int health = 0;
 	private int lives = 3;
@@ -52,9 +47,6 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		hb = new HealthBar(this);
 
 		kList.addKeyFrame(new KeyFrame(100, KeyFrameType.GRAVITY, 0));
-		
-		this.co = new CharacterOverlay(this);
-		this.h = new HealthBar(this);
 	}
 	
 	public void updateGhostBox(int xChange, int yChange) {
