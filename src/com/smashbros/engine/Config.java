@@ -28,10 +28,6 @@ public class Config {
 		return this.data.get(key);
 	}
 	
-	public <T> void set(String key, T value) {
-		this.data.set(key, value);
-	}
-	
 	public static Config instance() {
 		if (_instance == null)
 			_instance = new Config();

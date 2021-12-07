@@ -13,10 +13,6 @@ public class KeyValue<T> {
 		return value;
 	}
 	
-	public void setValue(T value2) {
-		this.value = value2;
-	}
-	
 	public String getKey() {
 		return key;
 	}

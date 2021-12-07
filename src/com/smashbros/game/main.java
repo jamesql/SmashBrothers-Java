@@ -20,18 +20,15 @@ public class Main extends Application {
 	public static void setupConfig() {
 		cfg.add("windowX", 1280.); // doubles
 		cfg.add("windowY", 720.);
-		
-		
-		// character file names
-		cfg.add("currentMap", "none");
 	}
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		new Engine(cfg.get("windowX"), cfg.get("windowY"), primaryStage);
-    
-		Map m = new Map("default");
-		m.addPlatformRow(280, 655, 12);
-		m.addPlatformRow(285, 450, 3);
+		Map m = new Map();
+		
+		m.addPlatform(280, 655, 12);
+		m.addPlatform(285, 450, 3);
 	}
+
 }
