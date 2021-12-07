@@ -2,6 +2,7 @@ package com.smashbros.engine;
 
 import java.util.ArrayList;
 
+import com.smashbros.enums.Direction;
 import com.smashbros.interfaces.IDrawable;
 import com.smashbros.interfaces.IHitbox;
 import com.smashbros.interfaces.IRunnable;
@@ -61,6 +62,19 @@ public class EntityList implements IRunnable {
 			}
 		}
 		
+		return false;
+	}
+	
+	public static boolean checkAttackingHits(Character r) {
+		for (Entity e : list) {
+			if (!(e instanceof Character) || e.eIndex == r.eIndex) continue;
+			Character c = (Character) e;
+			if (c.getHitbox().isColliding(r.getHitbox())) {
+				c.setHealth(c.getHealth() + 1);
+				c.knockback(Direction.RIGHT);
+			}
+			
+		}
 		return false;
 	}
 	

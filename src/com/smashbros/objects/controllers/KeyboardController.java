@@ -50,6 +50,9 @@ public class KeyboardController extends Controller {
 			case ATTACK_GENERIC:
 				cEntity.attack();
 				break;
+			case BLOCK:
+				cEntity.block();
+				break;
 			default: break;
 			}
 		}

@@ -6,4 +6,5 @@ public interface IControllable {
 	public void right();
 	public void down();
 	public void attack();
+	public void block();
 }

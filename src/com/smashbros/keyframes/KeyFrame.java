@@ -40,6 +40,11 @@ public class KeyFrame {
 		return new Point2D(0,0);
 	}
 	
+	private Point2D getNextKnockbackFrame() {
+		curFrame++;
+		return new Point2D(5,0);
+	}
+	
 	public Point2D getNextFrame() {
 		if (!hasFrames()) return null;
 		
@@ -50,6 +55,8 @@ public class KeyFrame {
 			return getNextGravityFrame();
 		case ATTACKING:
 			return getNextAttackingFrame();
+		case KNOCKBACK:
+			return getNextKnockbackFrame();
 		default:
 			return null;
 		}

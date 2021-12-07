@@ -11,5 +11,6 @@ public enum KeyAction {
 	ATTACK_LEFT,
 	ATTACK_UP, // figure attack system? combo?
 	ATTACK_DOWN,
-	ATTACK_GENERIC
+	ATTACK_GENERIC,
+	BLOCK
 }
