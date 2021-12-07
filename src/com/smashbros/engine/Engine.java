@@ -8,6 +8,7 @@ import com.smashbros.objects.controllers.Controller;
 import com.smashbros.objects.controllers.KeyActionPair;
 import com.smashbros.objects.controllers.KeyboardController;
 import com.smashbros.objects.Character;
+import com.smashbros.objects.Map;
 
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -19,8 +20,14 @@ public class Engine extends Window implements IRunnable {
 	public Engine(double x, double y, Stage s) {
 		super(x, y, s);
 		setup();
+
 		new KeyboardController(new Character(400, 200, "pgriff"));
 		new KeyboardController(new Character(650, 100, "default"), KeyActionPair.DEFAULT_ARROW);
+
+        
+		Map m = new Map("default");
+		m.addPlatformRow(280, 655, 12);
+		m.addPlatformRow(285, 450, 3);
 
 	}
 	

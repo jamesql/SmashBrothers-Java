@@ -20,10 +20,21 @@ public class Window {
 	
 	public static void setScene(Scene s) {
 		currentScene = s;
+		stage.setScene(s);
+	}
+
+	public static void nextScene() {
+		int index = scenes.indexOf(currentScene);
+		Scene next = index == scenes.size()-1 ? scenes.get(0) : scenes.get(scenes.indexOf(currentScene)+1);
+		setScene(next);
+	}
+
+	public static void setStart() {
+		stage.setScene(scenes.get(0));
 	}
 	
-	public static Scene makeScene() {
-		Scene thisScene = new Scene(root, x, y);
+	public static Scene makeScene(Pane p) {
+		Scene thisScene = new Scene(p, x, y);
 		scenes.add(thisScene);
 		return thisScene;
 	}
@@ -40,7 +51,7 @@ public class Window {
 		root.getChildren().add(canvas);
 		
 		// change multiple scenes main menu etc
-		setScene(makeScene());
+		setScene(makeScene(root));
 		
 		stage.setTitle("Super Scuffed Bros");
 		stage.setScene(currentScene);
