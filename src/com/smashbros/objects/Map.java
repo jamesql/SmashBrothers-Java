@@ -37,4 +37,5 @@ public class Map extends Overlay {
 	public void render() {
 		// unused
 	}
+	
 }

@@ -29,10 +29,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		new Engine(cfg.get("windowX"), cfg.get("windowY"), primaryStage);
-		
+    
 		Map m = new Map("default");
 		m.addPlatformRow(280, 655, 12);
 		m.addPlatformRow(285, 450, 3);
-		
 	}
 }

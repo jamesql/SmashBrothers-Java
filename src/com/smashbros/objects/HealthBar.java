@@ -1,3 +1,4 @@
+
 package com.smashbros.objects;
 
 import java.util.ArrayList;
@@ -98,5 +99,5 @@ public class HealthBar extends Overlay {
 		updateLives();
 		updateHealth();
 	}
-
+  
 }
