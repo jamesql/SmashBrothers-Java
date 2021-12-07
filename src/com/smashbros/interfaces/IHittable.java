@@ -15,5 +15,7 @@ public interface IHittable {
     
     public boolean isAttacking();
     
+    public boolean isBlocking();
+    
     public void die();
 }

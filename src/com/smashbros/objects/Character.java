@@ -30,6 +30,7 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	private HealthBar hb;
 	private String characterName;
 	private Point2D origin;
+	private boolean blocking = false;
 	
 	public Character(int x, int y, String character) {
 		super("character");
@@ -79,6 +80,15 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		return this.chOverlay;
 	}
 	
+	public boolean isFrozen() {
+		return kList.numOfType(KeyFrameType.KNOCKBACK) > 0;
+	}
+	
+	public void knockback(Direction d) {
+		dir = d;
+		kList.addKeyFrame(new KeyFrame(15, KeyFrameType.KNOCKBACK, 15));
+	}
+	
 	@Override
 	public void draw() {
 		
@@ -97,7 +107,7 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		vbox.setY(this.y);
 		
 		// EntityList attack
-		if (isAttacking()) System.out.println("attacking");
+		if (isAttacking()) EntityList.checkAttackingHits(this);
 		
 		this.hbox.updateFromGraphic();
 		
@@ -115,24 +125,35 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 
 	@Override
 	public void left() {
+		if (isFrozen()) return;
 		updateGhostBox(-5, 0);
 		dir = Direction.LEFT;
 	}
 
 	@Override
 	public void right() {
+		if (isFrozen()) return;
 		updateGhostBox(5, 0);	
 		dir = Direction.RIGHT;
 	}
 
 	@Override
 	public void down() {
+		if (isFrozen()) return;
 		updateGhostBox(0, 8);		
 	}
 	
 	@Override
 	public void attack() {
-		kList.addKeyFrame(new KeyFrame(30, KeyFrameType.ATTACKING, 25));
+		if (isFrozen()) return;
+		kList.addKeyFrame(new KeyFrame(5, KeyFrameType.ATTACKING, 9));
+	}
+	
+	@Override
+	public void block() {
+		if (isFrozen()) return;
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -162,8 +183,12 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 
 	@Override
 	public Color colorHealthIndicator() {
-		int green = 1-((health/255)*2);
-		int red = health/255;
+		double hHealth = health > 125 ? 125 : health;
+		double green = 1-((hHealth/255.0)*2);
+		double red = hHealth/255;
+		
+		red = red > 1.0 ? 1.0 : red;
+		green = green < 0.0 ? 0.0 : green;
 		return new Color(red, green, 0, 1);
 	}
 
@@ -179,6 +204,11 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		if (lives > 0) resetBox();
 		else resetBox(); // dead for good
 		
+	}
+
+	@Override
+	public boolean isBlocking() {
+		return this.blocking;
 	}
 
 }
