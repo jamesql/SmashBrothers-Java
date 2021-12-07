@@ -2,7 +2,6 @@ package com.smashbros.engine;
 
 import java.util.ArrayList;
 
-import com.smashbros.enums.Direction;
 import com.smashbros.interfaces.IDrawable;
 import com.smashbros.interfaces.IHitbox;
 import com.smashbros.interfaces.IRunnable;
@@ -71,7 +70,7 @@ public class EntityList implements IRunnable {
 			Character c = (Character) e;
 			if (c.getHitbox().isColliding(r.getHitbox())) {
 				c.setHealth(c.getHealth() + 1);
-				c.knockback(Direction.RIGHT);
+				c.knockback(r.getDir());
 			}
 			
 		}

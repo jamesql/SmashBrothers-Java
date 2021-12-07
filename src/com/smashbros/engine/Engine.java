@@ -12,7 +12,6 @@ import com.smashbros.objects.Character;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
 public class Engine extends Window implements IRunnable {
