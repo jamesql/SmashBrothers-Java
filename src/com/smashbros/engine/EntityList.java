@@ -71,7 +71,7 @@ public class EntityList implements IRunnable {
 			Character c = (Character) e;
 			if (c.getHitbox().isColliding(r.getHitbox())) {
 				c.setHealth(c.getHealth() + 1);
-				c.knockback(r.getDir());
+				c.knockback(Direction.RIGHT);
 			}
 			
 		}
