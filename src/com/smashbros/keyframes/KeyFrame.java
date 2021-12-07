@@ -45,10 +45,10 @@ public class KeyFrame {
 	
 	private Point2D getNextKnockbackFrame() {
 		int x = maxFrames - curFrame;
-		
+		int y = (int) (1.5*-x);
 		
 		curFrame++;
-		return new Point2D(x,0);
+		return new Point2D(x,y);
 	}
 	
 	public Point2D getNextFrame() {

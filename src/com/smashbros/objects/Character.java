@@ -89,6 +89,11 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		kList.addKeyFrame(new KeyFrame(this, 15, KeyFrameType.KNOCKBACK, 15));
 	}
 	
+	public void resetKeyFrames() {
+		kList.clearList();
+		kList.addKeyFrame(new KeyFrame(this, 100, KeyFrameType.GRAVITY, 0));
+	}
+	
 	@Override
 	public void draw() {
 		
@@ -201,6 +206,7 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 	public void die() {
 		setLives(this.lives-1);
 		setHealth(0);
+		resetKeyFrames();
 		
 		if (lives > 0) resetBox();
 		else resetBox(); // dead for good

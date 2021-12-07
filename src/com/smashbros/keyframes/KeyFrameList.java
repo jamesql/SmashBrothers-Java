@@ -55,4 +55,8 @@ public class KeyFrameList {
 		return c;
 	}
 	
+	public void clearList() {
+		list.clear();
+	}
+	
 }
