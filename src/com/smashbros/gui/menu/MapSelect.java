@@ -14,7 +14,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 public class MapSelect extends Menu {
-    private ImageView bg;
     private HBox imageRow = new HBox();
     private ArrayList<ImageView> mapImages = new ArrayList<ImageView>();
 
@@ -22,10 +21,7 @@ public class MapSelect extends Menu {
 
     public MapSelect() {
         super();
-        this.bg = new ImageView(Engine.readImage("bgclean.png"));
         MenuButton btn = new MenuButton("next");
-        btn.getGraphic().setOnMouseReleased(btn.startGame);
-        this.addMenuNode(bg);
         this.addMenuNode(btn.getGraphic());
         showMaps();
         setOnClick();

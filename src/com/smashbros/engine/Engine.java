@@ -55,7 +55,7 @@ public class Engine extends Window implements IRunnable {
 	
 	public static Image readImage(String fileName) {
 		try {
-			return new Image(new FileInputStream(String.format("src\\com\\smashbros\\assets\\%s", fileName)));
+			return new Image(new FileInputStream(String.format("src/com/smashbros/assets/%s", fileName)));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

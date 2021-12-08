@@ -24,6 +24,8 @@ public class Main extends Application {
 		
 		// character file names
 		cfg.add("currentMap", "default");
+		cfg.add("char1", "default");
+		cfg.add("char2", "pgriff");
 	}
 	
 	@Override
@@ -32,6 +34,7 @@ public class Main extends Application {
 		new Engine(cfg.get("windowX"), cfg.get("windowY"), primaryStage);
 		new MainMenu();
 		new MapSelect();
+		new CharacterSelect();
 		Engine.nextScene();
 		
 		
