@@ -34,4 +34,11 @@ public abstract class Controller implements IRunnable {
 	public static void keyRelease(KeyCode c) {
 		activeCodes.removeAll(Collections.singletonList(c));
 	}
+	
+	public static void killAll() {
+		activeCodes.clear();
+		controllers.forEach(x-> {
+			x = null;
+		});
+	}
 }

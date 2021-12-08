@@ -15,6 +15,11 @@ public class EntityList implements IRunnable {
 		list.add(e);
 	}
 	
+	public static void clearList() {
+		list.clear();
+		Entity.resetCount();
+	}
+	
 	static {
 		list = new ArrayList<Entity>();
 		Tick.addToLoop(new EntityList());
@@ -69,7 +74,7 @@ public class EntityList implements IRunnable {
 			if (!(e instanceof Character) || e.eIndex == r.eIndex) continue;
 			Character c = (Character) e;
 			if (c.getHitbox().isColliding(r.getHitbox())) {
-				c.setHealth(c.getHealth() + 1);
+				c.setHealth(c.getHealth() + 3);
 				c.knockback(r.getDir());
 			}
 			

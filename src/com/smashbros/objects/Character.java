@@ -116,7 +116,7 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		
 		this.hbox.updateFromGraphic();
 		
-		if (y > 850 || x < -100 || x > 1400) die();
+		if (y > 850 || x < -100 || x > 1300) die();
 		
 	}
 
@@ -209,7 +209,10 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		resetKeyFrames();
 		
 		if (lives > 0) resetBox();
-		else resetBox(); // dead for good
+		else {
+			setLives(3);
+			Engine.resetGame();
+		}
 		
 	}
 

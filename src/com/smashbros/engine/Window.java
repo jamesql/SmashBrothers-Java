@@ -20,12 +20,29 @@ public class Window {
 	
 	public static void setScene(Scene s) {
 		currentScene = s;
+		stage.setScene(currentScene);
 	}
 	
 	public static Scene makeScene() {
 		Scene thisScene = new Scene(root, x, y);
 		scenes.add(thisScene);
 		return thisScene;
+	}
+	
+	public static Scene makeScene(Pane p) {
+		Scene thisScene = new Scene(p, x, y);
+		scenes.add(thisScene);
+		return thisScene;
+	}
+	
+	public static void setStart() {
+		stage.setScene(scenes.get(0));
+	}
+	
+	public static void nextScene() {
+		int index = scenes.indexOf(currentScene);
+		Scene next = index == scenes.size()-1 ? scenes.get(0) : scenes.get(scenes.indexOf(currentScene)+1);
+		setScene(next);
 	}
  
 	public Window(double x, double y, Stage s) {
