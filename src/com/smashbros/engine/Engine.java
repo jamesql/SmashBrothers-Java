@@ -40,8 +40,8 @@ public class Engine extends Window implements IRunnable {
 	public static void setMap() {
 		Engine.root.getChildren().clear();
 		
-		new KeyboardController(new Character(400, 200, "pgriff"));
-		new KeyboardController(new Character(650, 100, "default"), KeyActionPair.DEFAULT_ARROW);
+		new KeyboardController(new Character(400, 200, cfg.get("char1")));
+		new KeyboardController(new Character(650, 100, cfg.get("char2")), KeyActionPair.DEFAULT_ARROW);
 
 		Map m = new Map(cfg.get("currentMap"));
 		m.addPlatformRow(280, 655, 12);

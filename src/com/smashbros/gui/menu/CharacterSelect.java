@@ -13,19 +13,29 @@ import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 public class CharacterSelect extends Menu {
     private HBox imageRow = new HBox();
     private ArrayList<ImageView> characterImgs = new ArrayList<ImageView>();
     private ArrayList<String> charNames = new ArrayList<String>(); 
     private MenuButton selectBtn = new MenuButton("select");
-
-    private Config cfg = Config.instance();
-
+   
+    // change to private
+    public static String currentSelected = "default";
+    public static Text curSelect = new Text("Player 1 Selecting");
+    public static int playerSelecting = 1;
+   
     public CharacterSelect() {
-        MenuButton doneBtn = new MenuButton("done");
-        this.addMenuNode(doneBtn.getGraphic());
+        curSelect.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 30));
+        curSelect.setX(200);
+        curSelect.setY(200);
+        this.addMenuNode(curSelect);
         this.addMenuNode(selectBtn.getGraphic());
+        curSelect.toFront();
         showChars();
         setOnClickImg();
         setOnClickSelect();
@@ -35,8 +45,10 @@ public class CharacterSelect extends Menu {
         for(ImageView i : characterImgs) {
             i.setOnMousePressed(new EventHandler<MouseEvent>(){
                 @Override
-                public void handle(MouseEvent arg0) {
-
+                public void handle(MouseEvent e) {
+                	ImageView f = (ImageView) e.getSource();
+                	String s = f.getImage().getUrl();
+                	CharacterSelect.currentSelected = s.substring(s.indexOf("ch-")+3, s.indexOf("."));
                 }
             });
         }
@@ -46,10 +58,24 @@ public class CharacterSelect extends Menu {
         selectBtn.getGraphic().setOnMouseReleased(new EventHandler<MouseEvent>(){
 
             @Override
-            public void handle(MouseEvent arg0) {
-                // TODO Auto-generated method stub
-                // isSelected();
-            	Engine.setMap();
+            public void handle(MouseEvent e) {
+
+            	if (CharacterSelect.currentSelected.equals("none")) return;
+            	            	
+            	switch (CharacterSelect.playerSelecting) {
+            	case 1:
+            		Config.instance().set("char1", CharacterSelect.currentSelected);
+            		CharacterSelect.curSelect.setText("Player 2 Selecting");
+            		CharacterSelect.playerSelecting++;
+            		break;
+            	case 2:
+            		Config.instance().set("char2", CharacterSelect.currentSelected);
+            		Engine.setMap();
+            		CharacterSelect.playerSelecting = 1;
+            		break;
+            	}
+            	
+            	CharacterSelect.currentSelected = "default";
             }
 
         });
