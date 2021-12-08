@@ -69,8 +69,8 @@ public class CharacterSelect extends Menu {
                 String charName = pathString.substring(pathString.indexOf("-")+1, pathString.indexOf("."));
                 charNames.add(charName);
                 ImageView iv = new ImageView(pathString);
-                iv.setFitHeight(144);
-                iv.setFitWidth(256);
+                iv.setFitHeight(100);
+                iv.setFitWidth(100);
                 characterImgs.add(iv);
             });
         } catch (Exception e) {
@@ -79,8 +79,8 @@ public class CharacterSelect extends Menu {
 
         imageRow.setSpacing(20);
         imageRow.getChildren().addAll(characterImgs);
-        imageRow.setLayoutX(374);
-        imageRow.setLayoutY(278);
+        imageRow.setLayoutX(460);
+        imageRow.setLayoutY(310);
 
         this.addMenuNode(imageRow);
     }
