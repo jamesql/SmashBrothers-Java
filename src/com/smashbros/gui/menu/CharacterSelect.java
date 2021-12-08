@@ -18,6 +18,8 @@ public class CharacterSelect extends Menu {
     private ArrayList<ImageView> characterImgs = new ArrayList<ImageView>();
     private ArrayList<String> charNames = new ArrayList<String>(); 
     private MenuButton selectBtn = new MenuButton("select");
+    private int clicked = 0;
+    private String currChar = "";
 
     private Config cfg = Config.instance();
 
@@ -35,7 +37,7 @@ public class CharacterSelect extends Menu {
             i.setOnMousePressed(new EventHandler<MouseEvent>(){
                 @Override
                 public void handle(MouseEvent arg0) {
-
+                    
                 }
             });
         }
@@ -46,8 +48,13 @@ public class CharacterSelect extends Menu {
 
             @Override
             public void handle(MouseEvent arg0) {
-                // TODO Auto-generated method stub
-                // isSelected();
+                if(clicked == 0) {
+                    cfg.set("char1", "");
+                } else if(clicked == 1) {
+                    cfg.set("char2", "");
+                }
+                
+                clicked++;
             }
 
         });
