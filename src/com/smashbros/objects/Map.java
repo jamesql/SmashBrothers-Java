@@ -22,7 +22,7 @@ public class Map extends Overlay {
 		this.ln = levelName;
 		this.i = Engine.readImage(String.format("map-%s.png", levelName));
 		this.bg = new ImageView(i);
-		bg.maxHeight(cfg.get("windowY"));
+		bg.setFitHeight(cfg.get("windowY"));
 		bg.setFitWidth(cfg.get("windowX"));
 		spriteList.add(this.bg);
 		this.addNodesToEngine();

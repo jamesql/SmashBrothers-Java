@@ -37,7 +37,6 @@ public class Tick {
 			 
 		 };
 		 
-		 // change config
 		 Tick.t = new Timeline(new KeyFrame(Duration.millis(17), Tick.e));
 		 Tick.t.setCycleCount(Timeline.INDEFINITE);
 		 Tick.t.play();
