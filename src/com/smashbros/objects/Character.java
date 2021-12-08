@@ -204,13 +204,16 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 
 	@Override
 	public void die() {
+		if (lives == 4) return;
+		
+		System.out.println("die");
 		setLives(this.lives-1);
 		setHealth(0);
 		resetKeyFrames();
 		
 		if (lives > 0) resetBox();
 		else {
-			setLives(3);
+			setLives(4);
 			Engine.resetGame();
 		}
 		
