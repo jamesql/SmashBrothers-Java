@@ -45,7 +45,7 @@ public class KeyFrame {
 	
 	private Point2D getNextKnockbackFrame() {
 		int x = maxFrames - curFrame;
-		int y = (int) (1.5*-x);
+		int y = (int) ((0.5 + (c.getHealth()/100))*-x);
 		
 		curFrame++;
 		return new Point2D(x,y);

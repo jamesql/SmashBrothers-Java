@@ -3,6 +3,9 @@ package com.smashbros.game;
 import com.smashbros.engine.Config;
 import com.smashbros.engine.Engine;
 import com.smashbros.engine.Tick;
+import com.smashbros.gui.menu.CharacterSelect;
+import com.smashbros.gui.menu.MainMenu;
+import com.smashbros.gui.menu.MapSelect;
 import com.smashbros.objects.Map;
 
 import javafx.application.Application;
@@ -24,15 +27,19 @@ public class Main extends Application {
 		
 		// character file names
 		cfg.add("currentMap", "none");
+		cfg.add("char1", "default");
+		cfg.add("char2", "pgriff");
 	}
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		new Engine(cfg.get("windowX"), cfg.get("windowY"), primaryStage);
 		
-		Map m = new Map("default");
-		m.addPlatformRow(280, 655, 12);
-		m.addPlatformRow(285, 450, 3);
+		new MainMenu();
+		new MapSelect();
+		new CharacterSelect();
+		
+		Engine.nextScene();
 		
 	}
 }
