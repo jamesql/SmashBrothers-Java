@@ -71,6 +71,7 @@ public class CharacterSelect extends Menu {
             	case 2:
             		Config.instance().set("char2", CharacterSelect.currentSelected);
             		Engine.setMap();
+            		CharacterSelect.curSelect.setText("Player 1 Selecting");
             		CharacterSelect.playerSelecting = 1;
             		break;
             	}

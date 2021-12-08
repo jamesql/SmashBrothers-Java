@@ -42,7 +42,6 @@ public class Window {
 	public static void nextScene() {
 		int index = scenes.indexOf(currentScene);
 		Scene next = index == scenes.size()-1 ? scenes.get(0) : scenes.get(scenes.indexOf(currentScene)+1);
-		System.out.println(next);
 		setScene(next);
 	}
  
