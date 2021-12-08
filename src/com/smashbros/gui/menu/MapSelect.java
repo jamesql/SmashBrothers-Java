@@ -43,7 +43,7 @@ public class MapSelect extends Menu {
     private void showMaps() {
 
         try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(
-            Paths.get("src/com/smashbros/assets"), "map-*.png")) {
+            Paths.get("src/com/smashbros/assets"), "map-*")) {
             dirStream.forEach(path ->  {
                 ImageView iv = new ImageView(path.toFile().toURI().toString());
                 iv.setFitHeight(144);
@@ -56,7 +56,7 @@ public class MapSelect extends Menu {
 
         imageRow.setSpacing(20);
         imageRow.getChildren().addAll(mapImages);
-        imageRow.setLayoutX(374);
+        imageRow.setLayoutX(226);
         imageRow.setLayoutY(278);
 
         this.addMenuNode(imageRow);
