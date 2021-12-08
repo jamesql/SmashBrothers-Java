@@ -116,7 +116,7 @@ public class Character extends Entity implements IDrawable, IControllable, IHitb
 		
 		this.hbox.updateFromGraphic();
 		
-		if (y > 850 || x < -100 || x > 1300) die();
+		if (y > 850 || y < -50 || x < -100 || x > 1300) die();
 		
 	}
 
