@@ -38,12 +38,16 @@ public class Engine extends Window implements IRunnable {
 	}
 	
 	public static void setMap() {
+		Engine.root.getChildren().clear();
+		
 		new KeyboardController(new Character(400, 200, "pgriff"));
 		new KeyboardController(new Character(650, 100, "default"), KeyActionPair.DEFAULT_ARROW);
 
 		Map m = new Map(cfg.get("currentMap"));
 		m.addPlatformRow(280, 655, 12);
 		m.addPlatformRow(285, 450, 3);
+		
+		setScene(scenes.get(0));
 	}
 	
 	public static void addNode(Node n) {
