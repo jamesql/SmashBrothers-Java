@@ -37,7 +37,6 @@ public class CharacterSelect extends Menu {
             i.setOnMousePressed(new EventHandler<MouseEvent>(){
                 @Override
                 public void handle(MouseEvent arg0) {
-                    
                 }
             });
         }
