@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import com.smashbros.engine.Config;
+import com.smashbros.engine.Engine;
 
 import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
@@ -48,6 +49,7 @@ public class CharacterSelect extends Menu {
             public void handle(MouseEvent arg0) {
                 // TODO Auto-generated method stub
                 // isSelected();
+            	Engine.setMap();
             }
 
         });

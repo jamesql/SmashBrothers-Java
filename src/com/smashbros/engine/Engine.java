@@ -47,7 +47,12 @@ public class Engine extends Window implements IRunnable {
 		m.addPlatformRow(280, 655, 12);
 		m.addPlatformRow(285, 450, 3);
 		
-		setScene(scenes.get(0));
+		setScene(root.getScene());
+	}
+	
+	public static void resetGame() {
+		Engine.root.getChildren().clear();
+		setScene(scenes.get(1));
 	}
 	
 	public static void addNode(Node n) {
