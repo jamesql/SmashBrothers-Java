@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import com.smashbros.engine.Config;
-import com.smashbros.engine.Engine;
 
 import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
@@ -45,7 +44,7 @@ public class MapSelect extends Menu {
     private void showMaps() {
 
         try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(
-            Paths.get("src\\com\\smashbros\\assets"), "map-vpw*.png")) {
+            Paths.get("src/com/smashbros/assets"), "map-vpw*.png")) {
             dirStream.forEach(path ->  {
                 ImageView iv = new ImageView(path.toFile().toURI().toString());
                 iv.setFitHeight(144);
