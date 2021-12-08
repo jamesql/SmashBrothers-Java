@@ -15,6 +15,11 @@ public class EntityList implements IRunnable {
 		list.add(e);
 	}
 	
+	public static void clearList() {
+		list.clear();
+		Entity.resetCount();
+	}
+	
 	static {
 		list = new ArrayList<Entity>();
 		Tick.addToLoop(new EntityList());

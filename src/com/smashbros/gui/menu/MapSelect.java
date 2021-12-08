@@ -33,6 +33,7 @@ public class MapSelect extends Menu {
                 public void handle(MouseEvent arg0) {
                     String fileLoc = i.getImage().getUrl();
                     String mapName = fileLoc.substring(fileLoc.indexOf("map-")+4, fileLoc.indexOf("."));
+                    System.out.println(mapName);
                     cfg.set("currentMap", mapName);
                 }
             });

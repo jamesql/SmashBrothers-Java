@@ -12,6 +12,10 @@ public class Entity {
 		this.type = t;
 	}
 	
+	public static void resetCount() {
+		entityCount = 0;
+	}
+	
 	public boolean isColliding() {
 		return EntityList.isColliding(this);
 	}

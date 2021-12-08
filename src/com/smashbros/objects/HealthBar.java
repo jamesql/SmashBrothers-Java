@@ -92,6 +92,10 @@ public class HealthBar extends Overlay {
 		
 		overlayNodeList.add(perc);
 	}
+	
+	public static void resetHbCount() {
+		hbCount = 0;
+	}
 
 	@Override
 	public void render() {
