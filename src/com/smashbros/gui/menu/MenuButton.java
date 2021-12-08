@@ -1,8 +1,5 @@
 package com.smashbros.gui.menu;
 
-
-import java.nio.channels.spi.SelectorProvider;
-
 import com.smashbros.engine.Engine;
 
 import javafx.event.EventHandler;
@@ -60,7 +57,13 @@ public class MenuButton {
         
     };
 
-
+    protected EventHandler<MouseEvent> startGame  = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent e) {
+            Engine.setMap();
+        }
+        
+    };
 
     public ImageView getGraphic() {
         return buttonImg; 

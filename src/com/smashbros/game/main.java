@@ -23,7 +23,7 @@ public class Main extends Application {
 		
 		
 		// character file names
-		cfg.add("currentMap", "none");
+		cfg.add("currentMap", "default");
 	}
 	
 	@Override

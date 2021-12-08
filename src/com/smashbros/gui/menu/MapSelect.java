@@ -9,28 +9,44 @@ import java.util.ArrayList;
 import com.smashbros.engine.Config;
 import com.smashbros.engine.Engine;
 
+import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-
 public class MapSelect extends Menu {
     private ImageView bg;
     private HBox imageRow = new HBox();
-    private static Pane p = new Pane();
+    private ArrayList<ImageView> mapImages = new ArrayList<ImageView>();
+
     Config cfg = Config.instance();
 
     public MapSelect() {
-        Engine.makeScene(p);
+        super();
         this.bg = new ImageView(Engine.readImage("bgclean.png"));
         MenuButton btn = new MenuButton("next");
-        p.getChildren().add(bg);
-        p.getChildren().add(btn.getGraphic());
+        btn.getGraphic().setOnMouseReleased(btn.startGame);
+        this.addMenuNode(bg);
+        this.addMenuNode(btn.getGraphic());
         showMaps();
+        setOnClick();
+    }
+
+    private void setOnClick() {
+        for(ImageView i : mapImages) {
+            i.setOnMouseClicked(new EventHandler<MouseEvent>(){
+                @Override
+                public void handle(MouseEvent arg0) {
+                    String fileLoc = i.getImage().getUrl();
+                    String mapName = fileLoc.substring(fileLoc.indexOf("-")+1, fileLoc.indexOf("."));
+                    System.out.println(mapName);
+                    cfg.set("currentMap", mapName);
+                }
+            });
+        }
     }
 
     // https://stackoverflow.com/questions/794381/how-to-find-files-that-match-a-wildcard-string-in-java
-    public void showMaps() {
-        ArrayList<ImageView> i = new ArrayList<ImageView>();
+    private void showMaps() {
 
         try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(
             Paths.get("src\\com\\smashbros\\assets"), "map-vpw*.png")) {
@@ -38,18 +54,18 @@ public class MapSelect extends Menu {
                 ImageView iv = new ImageView(path.toFile().toURI().toString());
                 iv.setFitHeight(144);
                 iv.setFitWidth(256);
-                i.add(iv);
+                mapImages.add(iv);
             });
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         imageRow.setSpacing(20);
-        imageRow.getChildren().addAll(i);
+        imageRow.getChildren().addAll(mapImages);
         imageRow.setLayoutX(374);
         imageRow.setLayoutY(278);
 
-        p.getChildren().add(imageRow);
+        this.addMenuNode(imageRow);
     }
 
 }

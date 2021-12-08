@@ -50,8 +50,9 @@ public class PlatformOverlay extends Overlay {
 	}
 	
 	public void readImages() {
-		this.middleImg = Engine.readImage(String.format("mapblock-%s-middle.png", map));
-		this.endImg = Engine.readImage(String.format("mapblock-%s-end.png", map));
+		// haven't made the other blocks yet
+		this.middleImg = Engine.readImage(String.format("mapblock-default-middle.png", map));
+		this.endImg = Engine.readImage(String.format("mapblock-default-end.png", map));
 	}
 	
 	private void setPos() {

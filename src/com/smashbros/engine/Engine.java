@@ -16,19 +16,10 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class Engine extends Window implements IRunnable {
-
+	private static Config cfg = Config.instance();
 	public Engine(double x, double y, Stage s) {
 		super(x, y, s);
 		setup();
-
-		new KeyboardController(new Character(400, 200, "pgriff"));
-		new KeyboardController(new Character(650, 100, "default"), KeyActionPair.DEFAULT_ARROW);
-
-        
-		Map m = new Map("default");
-		m.addPlatformRow(280, 655, 12);
-		m.addPlatformRow(285, 450, 3);
-
 	}
 	
 	public void setup() {
@@ -45,6 +36,15 @@ public class Engine extends Window implements IRunnable {
 		Tick.addToLoop(this);
 	}
 	
+	public static void setMap() {
+		new KeyboardController(new Character(400, 200, "pgriff"));
+		new KeyboardController(new Character(650, 100, "default"), KeyActionPair.DEFAULT_ARROW);
+
+		Map m = new Map(cfg.get("currentMap"));
+		m.addPlatformRow(280, 655, 12);
+		m.addPlatformRow(285, 450, 3);
+	}
+
 	public static void addNode(Node n) {
 		Engine.root.getChildren().add(n);
 	}

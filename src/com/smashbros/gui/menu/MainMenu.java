@@ -7,13 +7,12 @@ import javafx.scene.layout.Pane;
 
 public class MainMenu extends Menu {
     ImageView bg = new ImageView(Engine.readImage("menubg.png"));
-    private static Pane p = new Pane();
 
     public MainMenu() {
-        Engine.makeScene(p);
+        super();
         MenuButton btn = new MenuButton("start");
-        p.getChildren().add(bg);
-        p.getChildren().add(btn.getGraphic());
+        this.addMenuNode(bg);
+        this.addMenuNode(btn.getGraphic());
     }
 
 }
