@@ -63,6 +63,8 @@ public class Window {
 		stage.setScene(currentScene);
 		stage.setResizable(false);
 		stage.show();
+		
+		stage.getIcons().add(Engine.readImage("icon-chicken.png"));
 	}
 	
 	
