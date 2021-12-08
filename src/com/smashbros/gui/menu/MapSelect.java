@@ -6,33 +6,25 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+import com.smashbros.engine.Config;
 import com.smashbros.engine.Engine;
 
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 
 public class MapSelect extends Menu {
-    ImageView bg;
-    ImageView map1;
-    ImageView map2;
-    ImageView button;
+    private ImageView bg;
+    private HBox imageRow = new HBox();
     private static Pane p = new Pane();
+    Config cfg = Config.instance();
 
     public MapSelect() {
-        Scene mainMenuScene = Engine.makeScene(p);
-        bg = new ImageView(Engine.readImage("bgclean.png"));
-        button = new ImageView(Engine.readImage("nextbutton.png"));
-        button.setFitWidth(300);
-        button.setFitHeight(100);
-        button.setOnMouseClicked(Menu.toNextScene);
-        button.setX(950);
-        button.setY(575);
+        Engine.makeScene(p);
+        this.bg = new ImageView(Engine.readImage("bgclean.png"));
+        MenuButton btn = new MenuButton("next");
         p.getChildren().add(bg);
-        p.getChildren().add(button);
+        p.getChildren().add(btn.getGraphic());
         showMaps();
     }
 
@@ -52,9 +44,10 @@ public class MapSelect extends Menu {
             e.printStackTrace();
         }
 
-        HBox imageRow = new HBox();
         imageRow.setSpacing(20);
         imageRow.getChildren().addAll(i);
+        imageRow.setLayoutX(374);
+        imageRow.setLayoutY(278);
 
         p.getChildren().add(imageRow);
     }
