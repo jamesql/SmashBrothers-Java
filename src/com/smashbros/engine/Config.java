@@ -7,13 +7,9 @@ public class Config {
 	
 	private ConfigData data;
 	
-	public Config() {
-		this.data = new ConfigData();
-	}
-	
 	// set config data
-	public Config(ConfigData data) {
-		this.data = data;
+	private Config() {
+		this.data = new ConfigData();
 	}
 	
 	public ConfigData getData() {
